@@ -36,7 +36,8 @@ Hi h0w 哥，
         - `cd C:\Users\chkan` // 移動到 Users 下的 chkan 資料夾  
         - `cd C:\Program Files\Git` // 移動到 Program Files 下的 Git 資料夾  
         - `cd ..` // 移動到上一層資料夾  
-        - `cd ~` // 移動到根目錄  
+        - `cd ~` // 移動到系統預設的原點  
+        - `cd /` // 移動到根目錄
   
     - 切換硬碟槽不使用 cd，直接輸入該槽名稱即可：  
         - `D:\` // 從 C 槽切換至 D 槽  

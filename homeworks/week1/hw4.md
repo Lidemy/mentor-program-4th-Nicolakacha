@@ -83,7 +83,7 @@
 
 4. 把檔案移出版本控制
 
-    `git rm —cached 要移出的檔案`
+    `git rm --cached 要移出的檔案`
 
 5. 新建一個版本
 
@@ -93,13 +93,13 @@
 6. 檢查歷史紀錄
 
     `git log` // 可以看到每一個版本的 message、該版本號碼（對，長得像一串亂碼的那個）豪和建立日期
-    `git log —-oneline`  // 顯示版本的列表
+    `git log --oneline`  // 顯示版本的列表
 
 
 7. 穿越過去與未來
 
     `git checkout 那串版本號`  // 可以回到過去的版本
-    `git checkout master`  // 回到最新的狀態
+    `git checkout master`  // 切換到主 branch
 
 8. 我在 .gitignore，請忽略我
 
@@ -133,7 +133,7 @@
 
 6. 在各版本中穿梭
     `git checkout 版本號碼`  // 可以切換各個版本
-    `git checkout master`  // 回到最新版本
+    `git checkout master`  // 切換到主 branch
 
 
 ## 多人協作就用 Branch 
@@ -219,7 +219,7 @@ GitHub 官方建議的工作流程參考
 
 2. 我 commit 了但後悔了
     `git reset HEAD^ --hard`  // 完全刪除該 commit
-    `git resset HEAD6 --soft` // 剛才那個修改的檔案還是在，只是在沒有 commit 的狀態
+    `git reset HEAD^ --soft` // 剛才那個修改的檔案還是在，只是在沒有 commit 的狀態
 
 3. 還沒 commit 但後悔了想回到原來的狀態
     `git checkout -- <file>`  // 拋棄剛才的改變
@@ -228,8 +228,10 @@ GitHub 官方建議的工作流程參考
 4. 改 branch 的名稱
     `git branch -m <new_branch_name>`
 
-5. 想把遠端的 branch 抓下來
-    `git checkout <github_branch_name>`
+5. 想把本地端沒有的遠端 branch 抓下來 
+    - `git checkout <github_branch_name>`
+    - 但如果遠端的 branch 如果不是從 local 端發出，或在 local 端之外有新的 commit，就沒辦法直接下載完整的 branch，要先 `git fetch` 抓到遠端 branch 的新狀況，然後把新狀況 `merge` 進我們 local 端的 branch，或更直接的開一個同名的 branch 並 `pull` 下來之後，才是完整的 branch。
+    - [參考資料](https://gitbook.tw/chapters/github/pull-from-github.html)
 
 ## Git Hook
 預先設計好腳本，在某件事發生的時候觸發我們寫好的腳本
