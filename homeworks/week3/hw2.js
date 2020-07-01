@@ -9,19 +9,21 @@ rl.on('line', (line) => {
   lines.push(line);
 });
 
-function Narcissistic(n) { // 153
+function isNarcissistic(n) { // 153
   const str = String(n);
   let sum = 0;
   for (let i = 0; i < str.length; i += 1) {
     sum += (Number(str[i]) ** str.length);
   }
-  if (sum === n) return true;
+  if (sum === n) {
+    return true;
+  } return false;
 }
 
 function solve(input) {
   const arr = input[0].split(' ');
   for (let i = Number(arr[0]); i <= Number(arr[1]); i += 1) {
-    if (Narcissistic(i)) {
+    if (isNarcissistic(i)) {
       console.log(i);
     }
   }

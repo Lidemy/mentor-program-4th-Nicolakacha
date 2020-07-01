@@ -21,7 +21,7 @@ function solve(input) {
   const number = input[0];
   const arr = [];
   for (let i = 1; i <= number; i += 1) {
-    arr.push(Number(lines[i]));
+    arr.push(Number(input[i]));
   }
   for (let j = 0; j < arr.length; j += 1) {
     if (isPrime(arr[j]) === true) {
