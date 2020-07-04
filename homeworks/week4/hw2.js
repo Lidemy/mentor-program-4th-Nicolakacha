@@ -4,11 +4,11 @@ const request = require('request');
 const action = process.argv[2];
 const parameter = process.argv[3];
 const parameterTwo = process.argv[4];
-const API = 'https://lidemy-book-store.herokuapp.com';
+const APIUrl = 'https://lidemy-book-store.herokuapp.com';
 
 function listBook() {
   request.get(
-    `${API}/books?_limit=20`,
+    `${APIUrl}/books?_limit=20`,
     (error, response, body) => {
       let data;
       try {
@@ -26,7 +26,7 @@ function listBook() {
 
 function readBook(id) {
   request.get(
-    `${API}/books/${id}`,
+    `${APIUrl}/books/${id}`,
     (error, response, body) => {
       let data;
       try {
@@ -42,7 +42,7 @@ function readBook(id) {
 
 function deleteBook(id) {
   request.delete(
-    `${API}/books/${id}`,
+    `${APIUrl}/books/${id}`,
     (error, response, body) => {
       try {
         console.log('刪掉啦');
@@ -55,7 +55,7 @@ function deleteBook(id) {
 
 function createBook(name) {
   request.post({
-    url: `${API}/books`,
+    url: `${APIUrl}/books`,
     form: {
       name,
     },
@@ -70,7 +70,7 @@ function createBook(name) {
 
 function updateBook(id, name) {
   request.patch({
-    url: `${API}/books/${id}`,
+    url: `${APIUrl}/books/${id}`,
     form: {
       name,
     },

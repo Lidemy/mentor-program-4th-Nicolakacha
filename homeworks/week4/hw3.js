@@ -1,11 +1,11 @@
 const request = require('request');
 
-const API = 'https://restcountries.eu/rest/v2';
+const APIUrl = 'https://restcountries.eu/rest/v2';
 const country = process.argv[2];
 
 function getCountry(countryName) {
   request.get(
-    `${API}/name/${countryName}`,
+    `${APIUrl}/name/${countryName}`,
     (error, response, body) => {
       let data;
       try {
