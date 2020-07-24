@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700;900&display=swap");
+      @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-family: "Microsoft JhengHei";
+      }
+      body {
+        background: rgba(0, 0, 0, 0.2);
+        font-family: "MicrosoftJhengHei", serif;
+      }
+      p {
+        font-size: 14px;
+        line-height: 2em;
+      }
+      input:focus::-webkit-input-placeholder,
+      input:focus:-moz-placeholder,
+      input:focus::-moz-placeholder,
+      input:focus:-ms-input-placeholder {
+        color: transparent;
+      }
+      input:focus {
+        outline: transparent;
+      }
+
+      .form {
+        border: 0.5px solid #eef;
+        width: 645px;
+        height: 1095px;
+        margin: 120px auto;
+        padding: 54px 40px;
+        box-sizing: border-box;
+        background-color: #fff;
+        box-shadow: 1.8px 2.4px 5px 0 rgba(0, 0, 0, 0.3);
+        position: relative;
+      }
+      .form::before {
+        content: "";
+        width: 645px;
+        border-top: 8px solid #fad312;
+        position: absolute;
+        top: -8px;
+        right: 1px;
+        z-index: 2;
+      }
+      .title {
+        margin-bottom: 30px;
+      }
+      .title h1 {
+        font-size: 36px;
+        font-weight: 800;
+        letter-spacing: -1.8px;
+        margin-bottom: 30px;
+      }
+      .notice {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #e74149;
+      }
+      .group,
+      .btn-group {
+        font-size: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        margin-top: 40px;
+      }
+      .group label {
+        margin-bottom: 15px;
+      }
+      .group input {
+        border: 0.5px solid #d0d0d0;
+        width: 287px;
+        font-size: 16px;
+      }
+      .group .radio {
+        font-size: 14px;
+      }
+      .group .radio input {
+        width: 12px;
+        margin-right: 10px;
+      }
+      .group .radio:last-child {
+        margin-bottom: 0px;
+      }
+      .group h2 {
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 20px;
+      }
+      .group .other {
+        margin-bottom: 10px;
+      }
+      .group label:first-of-type:after{
+        content: ' *';
+        color: #e74149;
+      }
+      button {
+        margin: 15px 0;
+        width: 92px;
+        height: 40px;
+        border-radius: 3px;
+        border: 0px transparent;
+        background-color: #fad312;
+        font-size: 15px;
+      }
+      button:hover,
+      button:focus {
+        background-color: rgba(250, 212, 20, 0.6);
+        outline: 0px transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form">
+      <div class="title">
+        <h1>新拖延運動報名表單</h1>
+        <p>活動日期：2020/12/10 ~ 2020/12/11</p>
+        <p>活動地點：台北市大安區新生南路二段1號</p>
+        <p class="notice">* 必填</p>
+      </div>
+      <div class="group">
+        <label for="" class="user-name">暱稱</label>
+        <input type="text" id="user-name" placeholder="您的回答" />
+      </div>
+      <div class="group">
+        <label for="" class="user-email">電子郵件</label>
+        <input type="text" id="user-email" placeholder="您的電子郵件" />
+      </div>
+      <div class="group">
+        <label for="" class="user-mobile">手機號碼</label>
+        <input type="text" id="user-mobile" placeholder="您的手機號碼" />
+      </div>
+      <div class="group">
+        <label>報名類型</label>
+        <label class="radio" for="onBed">
+          <input name="radio" type="radio" />
+          躺在床上用想像力實作
+        </label>
+        <label class="radio" for="onFloor">
+          <input name="radio" type="radio" />
+          趴在地上滑手機找現成的
+        </label>
+      </div>
+      <div class="group">
+        <label for="" class="knowing-source">怎麼知道這個活動的？</label>
+        <input type="text" id="knowing-source" placeholder="您的回答" />
+      </div>
+      <div class="group">
+        <div class="other">其他</div>
+        <h2>對活動的一些建議</h2>
+        <input type="text" id="other" placeholder="您的回答" />
+      </div>
+      <div class="btn-group">
+        <button type="submit">提交</button>
+      </div>
+      <p>請勿透過表單送出您的密碼。</p>
+    </div>
+  </body>
+</html>
