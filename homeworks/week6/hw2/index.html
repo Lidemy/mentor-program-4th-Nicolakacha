@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700;900&display=swap");
-      @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
       * {
         margin: 0;
         padding: 0;
@@ -17,16 +15,38 @@
         background: rgba(0, 0, 0, 0.2);
         font-family: "MicrosoftJhengHei", serif;
       }
+      h1 {
+        font-size: 36px;
+        font-weight: 800;
+        letter-spacing: -1.8px;
+        margin-bottom: 30px;
+      }
+      h2 {
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 20px;
+      }
       p {
         font-size: 14px;
         line-height: 2em;
       }
-      input:focus::-webkit-input-placeholder,
-      input:focus:-moz-placeholder,
-      input:focus::-moz-placeholder,
-      input:focus:-ms-input-placeholder {
+      input {
+        border: 0.5px solid #d0d0d0;
+        width: 287px;
+        font-size: 16px;
+      }
+      input:focus::-webkit-input-placeholder {
         color: transparent;
       }
+      input:focus:-moz-placeholder {
+        color: transparent;
+      } /* FF 4-18 */
+      input:focus::-moz-placeholder {
+        color: transparent;
+      } /* FF 19+ */
+      input:focus:-ms-input-placeholder {
+        color: transparent;
+      } /* IE 10+ */
       input:focus {
         outline: transparent;
       }
@@ -54,12 +74,6 @@
       .title {
         margin-bottom: 30px;
       }
-      .title h1 {
-        font-size: 36px;
-        font-weight: 800;
-        letter-spacing: -1.8px;
-        margin-bottom: 30px;
-      }
       .notice {
         margin-top: 10px;
         font-size: 16px;
@@ -76,11 +90,6 @@
       .group label {
         margin-bottom: 15px;
       }
-      .group input {
-        border: 0.5px solid #d0d0d0;
-        width: 287px;
-        font-size: 16px;
-      }
       .group .radio {
         font-size: 14px;
       }
@@ -91,17 +100,12 @@
       .group .radio:last-child {
         margin-bottom: 0px;
       }
-      .group h2 {
-        font-size: 14px;
-        font-weight: 400;
-        margin-bottom: 20px;
+      .group label:first-of-type:after {
+        content: " *";
+        color: #e74149;
       }
       .group .other {
         margin-bottom: 10px;
-      }
-      .group label:first-of-type:after{
-        content: ' *';
-        color: #e74149;
       }
       button {
         margin: 15px 0;
