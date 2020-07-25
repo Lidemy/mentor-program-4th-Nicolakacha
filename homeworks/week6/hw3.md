@@ -17,7 +17,7 @@
 3. inline-block：有自己的寬跟高卻不會占據一整行。
 
 ## 請問 position: static, relative, absolute 跟 fixed 的差別是什麼？
-1.  static：靜止的，沒辦法改變位置，預設的自然文章流動。
+1. static：靜止的，沒辦法改變位置，預設的自然文章流動。
 2. relative：相對於它原本應該出現的位置，可調整位置，可用來當作容器，作為子層元素的定位參考點。
-3. absolute：不管身邊的其他元素，找有設定過 position 的上層元素當作依據。
+3. absolute：不管身邊的其他元素，找 position 不是 static 的上層元素當作定位依據。
 4. fixed：在可視畫面上做位置的設定，調整位置就是以可視畫面來做計算。
