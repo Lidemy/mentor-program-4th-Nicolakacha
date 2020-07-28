@@ -4,76 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>新拖延運動報名表單</title>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const submit = document.querySelector("form");
-        const name = document.querySelector("#user-name");
-        const email = document.querySelector("#user-email");
-        const mobile = document.querySelector("#user-mobile");
-        const type1 = document.querySelector("#onBed");
-        const type2 = document.querySelector("#onFloor");
-        const source = document.querySelector("#knowing-source");
-        const other = document.querySelector("#other");
-        submit.addEventListener("submit", check);
-        let checked;
-        const info = {
-          name: "",
-          email: "",
-          phone: "",
-          type: "",
-          source: "",
-          other: "",
-        };
-        function check(e) {
-          e.preventDefault();
-          if (name.value.trim() === "") {
-            document
-              .querySelector(".user-name .remind")
-              .classList.remove("hide");
-          }
-          if (email.value.trim() === "") {
-            document
-              .querySelector(".user-email .remind")
-              .classList.remove("hide");
-          }
-          if (mobile.value.trim() === "") {
-            document
-              .querySelector(".user-mobile .remind")
-              .classList.remove("hide");
-          }
-          if (type1.checked == true) {
-            checked = type1;
-          } else if (type2.checked == true) {
-            checked = type2;
-          } else {
-            document
-              .querySelector(".register-type .remind")
-              .classList.remove("hide");
-          }
-          if (source.value.trim() === "") {
-            document
-              .querySelector(".knowing-source .remind")
-              .classList.remove("hide");
-          }
-          
-          if (
-            name.value.trim() !== "" &&
-            email.value.trim() !== "" &&
-            mobile.value.trim() !== "" &&
-            (type1.checked == true || type2.checked == true) &&
-            source.value.trim() !== ""
-          ) {
-            info.name = name.value.trim();
-            info.email = email.value.trim();
-            info.phone = mobile.value.trim();
-            info.type = checked.value.trim();
-            info.source = source.value.trim();
-            info.other = other.value.trim();
-            alert(JSON.stringify(info));
-          }
-        }
-      });
-    </script>
     <style>
       .remind {
         color: red;
@@ -182,7 +112,6 @@
       }
       .group label {
         margin-bottom: 15px;
-
       }
       .group label input {
         margin-right: 10px;
@@ -288,4 +217,75 @@
       <p>© 2020 © Copyright. All rights Reserved.</p>
     </footer>
   </body>
+  <script>
+    const submit = document.querySelector("form");
+    const name = document.querySelector("#user-name");
+    const email = document.querySelector("#user-email");
+    const mobile = document.querySelector("#user-mobile");
+    const type1 = document.querySelector("#onBed");
+    const type2 = document.querySelector("#onFloor");
+    const source = document.querySelector("#knowing-source");
+    const other = document.querySelector("#other");
+
+    submit.addEventListener("submit", check);
+    let getName;
+    let getEmail;
+    let getMobile;
+    let typeOneChecked;
+    let typeTwoChecked;
+    let getSource;
+    let getOther;
+    const info = {
+      name: "",
+      email: "",
+      phone: "",
+      type: "",
+      source: "",
+      other: "",
+    };
+    function check(e) {
+      getName = name.value.trim();
+      getEmail = email.value.trim();
+      getMobile = mobile.value.trim();
+      typeOneChecked = type1.checked;
+      typeTwoChecked = type2.checked;
+      getSource = source.value.trim();
+      getOther = other.value.trim();
+      e.preventDefault();
+      if (!getName) {
+        document.querySelector(".user-name .remind").classList.remove("hide");
+      }
+      if (!getEmail) {
+        document.querySelector(".user-email .remind").classList.remove("hide");
+      }
+      if (!getMobile) {
+        document.querySelector(".user-mobile .remind").classList.remove("hide");
+      }
+      if (typeOneChecked) {
+        checked = type1;
+      } else if (typeTwoChecked) {
+        checked = type2;
+      } else {
+        document
+          .querySelector(".register-type .remind")
+          .classList.remove("hide");
+      }
+      if (!getSource) {
+        document
+          .querySelector(".knowing-source .remind")
+          .classList.remove("hide");
+      }
+
+      if (
+        getName && getEmail && getMobile && (typeOneChecked || typeTwoChecked) && getSource) {
+        info.name = getName;
+        info.email = getEmail;
+        info.phone = getMobile;
+        info.type = checked.value.trim();
+        info.source = getSource;
+        info.other = getOther;
+        alert(JSON.stringify(info));
+      }
+    }
+  </script>
 </html>
