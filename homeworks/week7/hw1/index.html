@@ -235,7 +235,7 @@
     let typeTwoChecked;
     let getSource;
     let getOther;
-  
+
     const info = {
       name: "",
       email: "",
@@ -278,7 +278,12 @@
       }
 
       if (
-        getName && getEmail && getMobile && (typeOneChecked || typeTwoChecked) && getSource) {
+        getName &&
+        getEmail &&
+        getMobile &&
+        (typeOneChecked || typeTwoChecked) &&
+        getSource
+      ) {
         info.name = getName;
         info.email = getEmail;
         info.phone = getMobile;
