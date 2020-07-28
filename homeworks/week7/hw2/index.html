@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Just A Bite</title>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const questions = document.querySelector(".questions");
+        questions.addEventListener("click", function (e) {
+          let target = e.target.closest(".group").id;
+          document
+            .querySelectorAll(".answer")
+            [e.target.closest(".group").id].classList.toggle("hide");
+        });
+      });
+    </script>
+    <style>
+      @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
+
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-family: "Microsoft JhengHei";
+      }
+      .wrap {
+        max-width: 1920px;
+        max-height: 1080px;
+        margin: 0 auto;
+        padding: 0 30px;
+      }
+      .section {
+        text-align: center;
+        margin-top: 80px;
+      }
+      .section__title {
+        display: inline-block;
+        font-size: 36px;
+        border-left: 15px solid #a3dea2;
+        padding-left: 14px;
+        margin-bottom: 40px;
+      }
+      .section__desc {
+        font-size: 16px;
+        line-height: 2em;
+        margin-bottom: 60px;
+      }
+      .button {
+        padding: 60px 80px;
+        box-sizing: border-box;
+        font-size: 36px;
+        color: #3e613d;
+        display: inline-block;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s linear;
+        margin: 11.5px;
+        margin-bottom: 0;
+      }
+      .button:hover {
+        transform: scale(1.02);
+        color: rgb(62, 97, 61, 0.5);
+      }
+      .navbar .wrap {
+        display: flex;
+        padding: 0 20px;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        height: 84px;
+      }
+      .navbar {
+        top: 0px;
+        width: 100%;
+        box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+        position: fixed;
+        z-index: 2;
+      }
+      .navbar__site-name a {
+        text-decoration: none;
+        color: #489846;
+        font-size: 36px;
+      }
+      .navbar__site-name:hover a {
+        text-decoration: none;
+        color: rgb(72, 152, 70, 0.5);
+        font-size: 36px;
+      }
+      .navbar__list {
+        display: flex;
+        font-size: 18px;
+      }
+      .navbar__list li {
+        margin-left: 12px;
+        border-radius: 8px;
+        transition: background 0.3s linear;
+        text-align: center;
+      }
+      .navbar__list li.active,
+      .navbar__list li:hover {
+        background: #ff7286;
+      }
+      .navbar__list li.active a,
+      .navbar__list li:hover a {
+        color: #fff;
+      }
+      .navbar__list a {
+        display: block;
+        padding: 12px 24px;
+        text-decoration: none;
+        color: #000;
+      }
+      .banner {
+        margin-top: 84px;
+        width: 100%;
+        height: 350px;
+        position: relative;
+        background: url("bg.jpg") center / cover no-repeat;
+      }
+      .banner h1 {
+        margin: 0;
+        line-height: 350px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        color: #fff;
+        font-size: 60px;
+        font-weight: 700;
+      }
+      .banner:after {
+        content: "";
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.2);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      .btn-order {
+        background-color: #a8e8e1;
+      }
+      .btn-query {
+        background-color: #f9f9b5;
+      }
+      .section__images {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .section__images .img {
+        width: 25%;
+        position: relative;
+        display: flex;
+      }
+      .section__images .img img {
+        width: 100%;
+        height: auto;
+      }
+      .section__images .img::after {
+        content: "敬請期待";
+        width: 100%;
+        height: 100%;
+        padding: 40% 0;
+        box-sizing: border-box;
+        position: absolute;
+        background-color: rgb(0, 0, 0, 0.2);
+        opacity: 0;
+        transition: opacity 0.2s linear;
+        color: #fff;
+        font-size: 32px;
+      }
+      .section__images .img:hover:after {
+        opacity: 1;
+      }
+      .comment .items {
+        display: flex;
+      }
+      .comment .item {
+        position: relative;
+        width: 33.33333%;
+        margin: 60px 20px 0;
+        padding: 56px 20px 40px;
+        border: 1px solid #c7e5ec;
+        line-height: 2em;
+      }
+      .comment .item img {
+        position: absolute;
+        left: 50%;
+        top: -20%;
+        transform: translateX(-50%);
+      }
+      .comment .item h3 {
+        margin-bottom: 10px;
+      }
+      .group {
+        display: flex;
+        flex-direction: column;
+        justify-items: left;
+      }
+      .questions .section {
+        padding: 0 5%;
+      }
+      .questions {
+        margin: 120px 0 220px 0;
+      }
+      .questions .group {
+        padding: 15px 0;
+      }
+      .question {
+        display: flex;
+        font-size: 20px;
+        cursor: pointer;
+        color: #4dd34b;
+      }
+      .question:hover {
+        color: rgb(72, 152, 70, 0.7);
+      }
+      .question__text {
+        margin-left: 10px;
+      }
+      .answer {
+        margin-top: -10px;
+        margin-bottom: 30px;
+        padding-left: 42px;
+        font-size: 18px;
+        text-align: left;
+      }
+      .questions hr {
+        border-color: cyan;
+      }
+      .hide {
+        display: none;
+      }
+      footer {
+        margin-top: 30px;
+      }
+      .footer__top .wrap {
+        display: flex;
+        justify-content: space-between;
+      }
+      .footer__top {
+        padding: 44px 30px 39px 30px;
+        background: #e8efee;
+      }
+      .footer__top div + div {
+        margin-top: 10px;
+      }
+      .footer__info {
+        margin-right: 16px;
+      }
+      .footer__info a {
+        text-decoration: none;
+        color: #484848;
+      }
+      .footer__site div:first-child {
+        font-size: 36px;
+        color: #489846;
+      }
+      .footer__site .social-media a {
+        font-size: 14px;
+        text-decoration: none;
+        color: #484848;
+      }
+      .footer__site .social-media a + a::before {
+        content: "/";
+        display: inline-block;
+        padding: 0 10px;
+      }
+      .footer__site .social-media a:hover,
+      .footer__info a:hover {
+        color: rgb(72, 72, 72, 0.5);
+      }
+      .footer__bottom {
+        padding: 15px 0;
+        background: #35564b;
+        text-align: center;
+        font-size: 16px;
+        color: #fff;
+      }
+      @media (max-width: 768px) {
+        .questions {
+          height: auto;
+        }
+        .navbar .wrap {
+          height: 140px;
+          padding: 0px;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        .navbar__list {
+          display: flex;
+          width: 100%;
+        }
+        .navbar__list li {
+          flex-grow: 1;
+          margin-left: 0;
+          border-radius: 0;
+        }
+        .navbar__site-name {
+          margin-top: 10px;
+        }
+        .footer__top .wrap {
+          flex-direction: column-reverse;
+        }
+        .footer__info {
+          margin-right: 0;
+          margin-top: 16px;
+        }
+        .section__images .img {
+          width: 100%;
+        }
+        .button {
+          padding: 30px 80px;
+          font-size: 20px;
+        }
+        .comment .items {
+          flex-wrap: wrap;
+        }
+        .comment .item {
+          width: 100%;
+          margin-top: 100px;
+        }
+        .banner {
+          position: relative;
+          background: url("bg.jpg") right / cover no-repeat;
+        }
+        .questions {
+          margin-top: 150px;
+        }
+        .section {
+          max-height: 2000px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <div class="wrap">
+        <div class="navbar__site-name">
+          <a href="#">Just A Bite!</a>
+        </div>
+        <ul class="navbar__list">
+          <li class="active"><a href="#">抽個大獎</a></li>
+          <li><a href="#">我要點餐</a></li>
+          <li><a href="#">查詢訂單</a></li>
+          <li><a href="#">常見問題</a></li>
+        </ul>
+      </div>
+    </nav>
+    <section class="questions">
+      <div class="wrap">
+        <div class="section">
+          <h2 class="section__title">FAQ - 常見問題</h2>
+          <div class="group" id="0">
+            <div class="question">
+              <div>Q1:</div>
+              <div class="question__text">請問團體用餐可以併桌嗎？</div>
+            </div>
+          </div>
+          <div class="answer hide">
+            一般來說，座位安排會視現場狀況而定的，若您有特別的預算可以加錢，還請於訂位時告知訂位人員。
+          </div>
+          <hr />
+          <div class="group" id="1">
+            <div class="question">
+              <div>Q2:</div>
+              <div class="question__text">請問自帶酒水需要收開瓶費嗎？</div>
+            </div>
+          </div>
+          <div class="answer hide">
+            本公司自帶酒水，不收任開瓶費，但要跟老闆喝一杯。
+          </div>
+          <hr />
+          <div class="group" id="2">
+            <div class="question">
+              <div>Q3:</div>
+              <div class="question__text">請問有預留位置給現場客人嗎？</div>
+            </div>
+          </div>
+          <div class="answer hide">
+            非假日的時候我們都有充足的位置的，請您不用擔心。假日人潮較多的時段，我們會看長相決定是否開放現場客戶用餐。
+          </div>
+          <hr />
+          <div class="group" id="3">
+            <div class="question">
+              <div>Q4:</div>
+              <div class="question__text">請問有和哪家信用卡合作優惠方案嗎？</div>
+            </div>
+          </div>
+          <div class="answer hide">
+            我們目前沒有提供信用卡優惠方案哦！用振興券的話可以找零。
+          </div>
+          <hr />
+          <div class="group" id="4">
+            <div class="question">
+              <div>Q5:</div>
+              <div class="question__text">請問是否有提供素食？</div>
+            </div>
+          </div>
+          <div class="answer hide">
+            各店皆有提供素食套餐，自助餐為七十八道菜色，亦為無限供應。
+          </div>
+          <hr />
+          <div class="group" id="5">
+            <div class="question">
+              <div>Q6:</div>
+              <div class="question__text">請問是否可以使用國民旅遊卡？</div>
+            </div>
+          </div>
+          <div class="answer hide">
+            可以是可以啦，只是服務費要加 30%。
+          </div>
+          <hr />
+          <div class="group" id="6">
+            <div class="question">
+              <div>Q7:</div>
+              <div class="question__text">請問各餐次有限定用餐時間嗎？</div>
+            </div>
+          </div>
+          <div class="answer hide">
+            用餐時間為五十二分十秒。
+          </div>
+          <hr />
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="footer__top">
+        <div class="wrap">
+          <div class="footer__info">
+            <div class="address">
+              餐館地址: 天上地下天堂路三分之一里六段520號
+            </div>
+            <div class="phone">
+              <label for="">phone: </label>
+              <a href="tel:+886-2-1314-5566">02-1314-5566</a>
+            </div>
+            <div class="open-time">
+              營業時間：週一〜週五 09:00~18:00 /
+              週六、週日、國定假日（含連假）休息
+            </div>
+            <div class="email">
+              <label for="">email:</label>
+              <a href="mailto:service@justabite.com.tw"
+                >service@justabite.com.tw</a
+              >
+            </div>
+          </div>
+          <div class="footer__site">
+            <div>Just A Bite!</div>
+            <div class="social-media">
+              <a href="#"
+                ><i class="fa fa-facebook-official" aria-hidden="true"></i>
+                Facebook</a
+              >
+              <a href="#"
+                ><i class="fa fa-instagram" aria-hidden="true"></i> Instagram</a
+              >
+              <a href="#"
+                ><i class="fa fa-youtube" aria-hidden="true"></i> YouTube</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>
+          Copyright © 2020 Just A Bite All Rights Reserved.
+          咬一口股份有限公司版權所有
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
