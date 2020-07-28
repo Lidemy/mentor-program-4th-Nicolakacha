@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>新拖延運動報名表單</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const submit = document.querySelector("form");
+        const name = document.querySelector("#user-name");
+        const email = document.querySelector("#user-email");
+        const mobile = document.querySelector("#user-mobile");
+        const type1 = document.querySelector("#onBed");
+        const type2 = document.querySelector("#onFloor");
+        const source = document.querySelector("#knowing-source");
+        const other = document.querySelector("#other");
+        submit.addEventListener("submit", check);
+        let checked;
+        const info = {
+          name: "",
+          email: "",
+          phone: "",
+          type: "",
+          source: "",
+          other: "",
+        };
+        function check(e) {
+          e.preventDefault();
+          if (name.value.trim() === "") {
+            document
+              .querySelector(".user-name .remind")
+              .classList.remove("hide");
+          }
+          if (email.value.trim() === "") {
+            document
+              .querySelector(".user-email .remind")
+              .classList.remove("hide");
+          }
+          if (mobile.value.trim() === "") {
+            document
+              .querySelector(".user-mobile .remind")
+              .classList.remove("hide");
+          }
+          if (type1.checked == true) {
+            checked = type1;
+          } else if (type2.checked == true) {
+            checked = type2;
+          } else {
+            document
+              .querySelector(".register-type .remind")
+              .classList.remove("hide");
+          }
+          if (source.value.trim() === "") {
+            document
+              .querySelector(".knowing-source .remind")
+              .classList.remove("hide");
+          }
+          
+          if (
+            name.value.trim() !== "" &&
+            email.value.trim() !== "" &&
+            mobile.value.trim() !== "" &&
+            (type1.checked == true || type2.checked == true) &&
+            source.value.trim() !== ""
+          ) {
+            info.name = name.value.trim();
+            info.email = email.value.trim();
+            info.phone = mobile.value.trim();
+            info.type = checked.value.trim();
+            info.source = source.value.trim();
+            info.other = other.value.trim();
+            alert(JSON.stringify(info));
+          }
+        }
+      });
+    </script>
+    <style>
+      .remind {
+        color: red;
+        font-size: 14px;
+        position: absolute;
+        bottom: -20px;
+      }
+      .hide {
+        display: none;
+      }
+      .user-name,
+      .user-email,
+      .user-mobile,
+      .register-type,
+      .knowing-source {
+        position: relative;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-family: "Microsoft JhengHei";
+      }
+      body {
+        max-width: 1920px;
+        background: rgba(0, 0, 0, 0.2);
+        font-family: "MicrosoftJhengHei", serif;
+      }
+      h1 {
+        font-size: 36px;
+        font-weight: 800;
+        letter-spacing: -1.8px;
+        margin-bottom: 30px;
+      }
+      h2 {
+        font-size: 14px;
+        font-weight: 400;
+        margin-bottom: 20px;
+      }
+      p {
+        font-size: 14px;
+        line-height: 2em;
+      }
+      input {
+        border: 0.5px solid #d0d0d0;
+        width: 287px;
+        font-size: 16px;
+      }
+      input:focus::-webkit-input-placeholder {
+        color: transparent;
+      }
+      input:focus:-moz-placeholder {
+        color: transparent;
+      } /* FF 4-18 */
+      input:focus::-moz-placeholder {
+        color: transparent;
+      } /* FF 19+ */
+      input:focus:-ms-input-placeholder {
+        color: transparent;
+      } /* IE 10+ */
+      input:focus {
+        outline: transparent;
+      }
+
+      .form {
+        position: relative;
+        border: 0.5px solid #eef;
+        margin: 120px auto;
+        padding: 54px 40px;
+        box-sizing: border-box;
+        max-width: 645px;
+        height: 1095px;
+        background-color: #fff;
+        box-shadow: 1.8px 2.4px 5px 0 rgba(0, 0, 0, 0.3);
+      }
+      @media (max-width: 768px) {
+        .form {
+          height: auto;
+          margin: 2%;
+        }
+      }
+      .form::before {
+        position: absolute;
+        border-top: 8px solid #fad312;
+        content: "";
+        width: 645px;
+        top: -8px;
+        right: 1px;
+        z-index: 2;
+      }
+      .title {
+        margin-bottom: 30px;
+      }
+      .notice {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #e74149;
+      }
+      .group,
+      .btn-group {
+        display: flex;
+        flex-direction: column;
+        margin-top: 40px;
+        align-items: start;
+        font-size: 20px;
+      }
+      .group label {
+        margin-bottom: 15px;
+
+      }
+      .group label input {
+        margin-right: 10px;
+        width: 12px;
+      }
+      .register-type label ~ label {
+        margin-bottom: 0px;
+        line-height: 2em;
+        font-size: 14px;
+      }
+      .group label:first-of-type:after {
+        content: " *";
+        color: #e74149;
+      }
+      .group .other {
+        margin-bottom: 10px;
+      }
+      button {
+        border-radius: 3px;
+        border: 0px transparent;
+        margin: 15px 0;
+        width: 92px;
+        height: 40px;
+        background-color: #fad312;
+        font-size: 15px;
+      }
+      button:hover {
+        background-color: rgba(250, 212, 20, 0.6);
+      }
+      button:focus {
+        outline: 0px transparent;
+      }
+      footer {
+        padding: 24px 12px;
+        background: black;
+        color: #999999;
+        font-size: 13px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="form">
+      <div class="title">
+        <h1>新拖延運動報名表單</h1>
+        <p>活動日期：2020/12/10 ~ 2020/12/11</p>
+        <p>活動地點：台北市大安區新生南路二段1號</p>
+        <p class="notice">* 必填</p>
+      </div>
+      <div class="group user-name">
+        <label for="user-name">暱稱</label>
+        <input type="text" id="user-name" placeholder="您的回答" />
+        <div class="remind hide">請輸入暱稱</div>
+      </div>
+      <div class="group user-email">
+        <label for="user-email">電子郵件</label>
+        <input type="text" id="user-email" placeholder="您的電子郵件" />
+        <div class="remind hide">請輸入Email</div>
+      </div>
+      <div class="group user-mobile">
+        <label for="user-mobile">手機號碼</label>
+        <input type="text" id="user-mobile" placeholder="您的手機號碼" />
+        <div class="remind hide">請輸入手機號碼</div>
+      </div>
+      <div class="group register-type">
+        <label>報名類型</label>
+        <label>
+          <input
+            name="radio"
+            type="radio"
+            id="onBed"
+            value="躺在床上用想像力實作"
+          />
+          <span>躺在床上用想像力實作</span>
+        </label>
+        <label>
+          <input
+            name="radio"
+            type="radio"
+            id="onFloor"
+            value="趴在地上滑手機找現成的"
+          />
+          <span>趴在地上滑手機找現成的</span>
+        </label>
+        <div class="remind hide">請選擇報名類型</div>
+      </div>
+      <div class="group knowing-source">
+        <label for="knowing-source">怎麼知道這個活動的？</label>
+        <input type="text" id="knowing-source" placeholder="您的回答" />
+        <div class="remind hide">請告訴我們您是怎麼知道這個活動的</div>
+      </div>
+      <div class="group other">
+        <div class="other">其他</div>
+        <h2>對活動的一些建議</h2>
+        <input type="text" id="other" placeholder="您的回答" />
+      </div>
+      <div class="btn-group">
+        <button type="submit">提交</button>
+      </div>
+      <p>請勿透過表單送出您的密碼。</p>
+    </form>
+    <footer>
+      <p>© 2020 © Copyright. All rights Reserved.</p>
+    </footer>
+  </body>
+</html>
