@@ -153,7 +153,9 @@
       }
     </style>
   </head>
+
   <body>
+
     <form class="form">
       <div class="title">
         <h1>新拖延運動報名表單</h1>
@@ -179,21 +181,11 @@
       <div class="group register-type">
         <label>報名類型</label>
         <label>
-          <input
-            name="radio"
-            type="radio"
-            id="onBed"
-            value="躺在床上用想像力實作"
-          />
+          <input name="radio" type="radio" value="1" />
           <span>躺在床上用想像力實作</span>
         </label>
         <label>
-          <input
-            name="radio"
-            type="radio"
-            id="onFloor"
-            value="趴在地上滑手機找現成的"
-          />
+          <input name="radio" type="radio" value="2" />
           <span>趴在地上滑手機找現成的</span>
         </label>
         <div class="remind hide">請選擇報名類型</div>
@@ -213,46 +205,34 @@
       </div>
       <p>請勿透過表單送出您的密碼。</p>
     </form>
+
     <footer>
       <p>© 2020 © Copyright. All rights Reserved.</p>
     </footer>
+
   </body>
+
   <script>
-    const submit = document.querySelector("form");
-    const name = document.querySelector("#user-name");
-    const email = document.querySelector("#user-email");
-    const mobile = document.querySelector("#user-mobile");
-    const type1 = document.querySelector("#onBed");
-    const type2 = document.querySelector("#onFloor");
-    const source = document.querySelector("#knowing-source");
-    const other = document.querySelector("#other");
-
-    submit.addEventListener("submit", check);
-    let getName;
-    let getEmail;
-    let getMobile;
-    let typeOneChecked;
-    let typeTwoChecked;
-    let getSource;
-    let getOther;
-
-    const info = {
-      name: "",
-      email: "",
-      phone: "",
-      type: "",
-      source: "",
-      other: "",
-    };
+    const form = document.querySelector("form");
+    form.addEventListener("submit", check);
     function check(e) {
       e.preventDefault();
-      getName = name.value.trim();
-      getEmail = email.value.trim();
-      getMobile = mobile.value.trim();
-      typeOneChecked = type1.checked;
-      typeTwoChecked = type2.checked;
-      getSource = source.value.trim();
-      getOther = other.value.trim();
+      const getName = document.querySelector("#user-name").value.trim();
+      const getEmail = document.querySelector("#user-email").value.trim();
+      const getMobile = document.querySelector("#user-mobile").value.trim();
+      const getSource = document.querySelector("#knowing-source").value.trim();
+      const getOther = document.querySelector("#other").value.trim();
+      const getTypes = document.querySelectorAll('input[type="radio"]');
+
+      //存取報名類型被選到的值
+      let checkType;
+      for (type of getTypes) {
+        if (type.checked) {
+          checkType = type;
+        }
+      }
+
+      //判斷是否要出現提醒
       if (!getName) {
         document.querySelector(".user-name .remind").classList.remove("hide");
       }
@@ -262,34 +242,23 @@
       if (!getMobile) {
         document.querySelector(".user-mobile .remind").classList.remove("hide");
       }
-      if (typeOneChecked) {
-        checked = type1;
-      } else if (typeTwoChecked) {
-        checked = type2;
-      } else {
-        document
-          .querySelector(".register-type .remind")
-          .classList.remove("hide");
+      if (!checkType) {
+        document.querySelector(".register-type .remind").classList.remove("hide");
       }
       if (!getSource) {
-        document
-          .querySelector(".knowing-source .remind")
-          .classList.remove("hide");
+        document.querySelector(".knowing-source .remind").classList.remove("hide");
       }
 
-      if (
-        getName &&
-        getEmail &&
-        getMobile &&
-        (typeOneChecked || typeTwoChecked) &&
-        getSource
-      ) {
-        info.name = getName;
-        info.email = getEmail;
-        info.phone = getMobile;
-        info.type = checked.value.trim();
-        info.source = getSource;
-        info.other = getOther;
+      //驗證表單內必選的選項是否都有選，並儲存成物件後 alert 出來
+      if (getName && getEmail && getMobile && getSource && checkType) {
+        const info = {
+          name: getName,
+          email: getEmail,
+          phone: getMobile,
+          type: checkType.value,
+          source: getSource,
+          other: getOther,
+        };
         alert(JSON.stringify(info));
       }
     }
