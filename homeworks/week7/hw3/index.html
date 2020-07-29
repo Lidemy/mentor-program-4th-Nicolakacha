@@ -74,6 +74,10 @@
         right: 18px;
         font-size: 24px;
       }
+      ul {
+        display: flex;
+        flex-direction: column;
+      }
       li {
         position: relative;
         display: flex;
@@ -137,32 +141,30 @@
 <script>
   const form = document.querySelector("#form");
   const items = document.querySelector("#items");
-  
+
   items.addEventListener("click", removeItem);
   form.addEventListener("submit", addItem);
 
-  function removeItem(e) {
-    if (e.target.classList.contains("delete")) {
-      let li = e.target.parentNode;
-      items.removeChild(li);
-    }
-  }
+  //把新做的拿到最前面
+  let order = -1;
+
   function addItem(e) {
     e.preventDefault();
     //做新的li
     const li = document.createElement("li");
-    li.classList.add("item");
+    li.className = "item";
+    li.style["order"] = order;
+    order--;
     //做新的確認按鈕
     const checkBtn = document.createElement("input");
     checkBtn.classList.add("check");
     checkBtn.setAttribute("type", "checkbox");
     //做新的內容
-    const content = document.createElement("p");
+    let content = document.createElement("p");
     const input = document.querySelector("input");
     const inputValue = input.value.trim();
     content.classList.add("item-content");
     content.textContent = inputValue;
-    console.log(content);
     //做新的刪除按鈕
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "delete";
@@ -174,6 +176,12 @@
       li.appendChild(deleteBtn);
       document.getElementById("items").appendChild(li);
       input.value = "";
+    }
+  }
+  function removeItem(e) {
+    if (e.target.classList.contains("delete")) {
+      let li = e.target.parentNode;
+      items.removeChild(li);
     }
   }
 </script>
