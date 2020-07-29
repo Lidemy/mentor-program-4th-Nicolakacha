@@ -245,6 +245,7 @@
       other: "",
     };
     function check(e) {
+      e.preventDefault();
       getName = name.value.trim();
       getEmail = email.value.trim();
       getMobile = mobile.value.trim();
@@ -252,7 +253,6 @@
       typeTwoChecked = type2.checked;
       getSource = source.value.trim();
       getOther = other.value.trim();
-      e.preventDefault();
       if (!getName) {
         document.querySelector(".user-name .remind").classList.remove("hide");
       }
