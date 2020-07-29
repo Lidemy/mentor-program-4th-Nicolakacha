@@ -205,7 +205,6 @@
       </div>
       <p>請勿透過表單送出您的密碼。</p>
     </form>
-
     <footer>
       <p>© 2020 © Copyright. All rights Reserved.</p>
     </footer>
@@ -223,7 +222,6 @@
       const getSource = document.querySelector("#knowing-source").value.trim();
       const getOther = document.querySelector("#other").value.trim();
       const getTypes = document.querySelectorAll('input[type="radio"]');
-
       //存取報名類型被選到的值
       let checkType;
       for (type of getTypes) {
@@ -231,7 +229,6 @@
           checkType = type;
         }
       }
-
       //判斷是否要出現提醒
       if (!getName) {
         document.querySelector(".user-name .remind").classList.remove("hide");
@@ -248,7 +245,6 @@
       if (!getSource) {
         document.querySelector(".knowing-source .remind").classList.remove("hide");
       }
-
       //驗證表單內必選的選項是否都有選，並儲存成物件後 alert 出來
       if (getName && getEmail && getMobile && getSource && checkType) {
         const info = {
