@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      body {
+        max-width: 1920px;
+        background: rgba(0, 0, 0, 0.3);
+        font-family: "Microsoft JhengHei", serif;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:active,
+      button:hover {
+        color: rgb(71, 157, 161, 0.5);
+      }
+      button,
+      input {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        color: #479da1;
+      }
+      input::placeholder {
+        color: transparent;
+      }
+      input:hover::placeholder {
+        color: hsl(183, 39%, 80%);
+      }
+      #form {
+        display: flex;
+        margin: 50px auto 40px;
+        padding: 20px 40px;
+        height: auto;
+        min-height: 300px;
+        max-width: 500px;
+        color: #479da1;
+        background-color: lightcyan;
+        box-shadow: 1.8px 2.4px 5px 0 rgba(0, 0, 0, 0.3);
+        flex-direction: column;
+      }
+      #title {
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 800;
+      }
+      #search,
+      #addItem {
+        position: relative;
+        display: flex;
+        font-size: 20px;
+      }
+      #addItem input {
+        border-bottom: 0.5px solid #479da1;
+        padding-bottom: 10px;
+        width: 100%;
+        font-size: 18px;
+      }
+      #addItem input:focus,
+      #addItem input:hover {
+        border-bottom: 1px solid #479da1;
+      }
+      #addItem button {
+        position: absolute;
+        right: 18px;
+        font-size: 24px;
+      }
+      ul {
+        display: flex;
+        flex-direction: column;
+      }
+      li {
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 0.5px solid #479da1;
+      }
+      li:hover {
+        border-bottom: 1px solid #479da1;
+      }
+      .item-content {
+        font-size: 18px;
+        padding: 0 10px;
+        width: 400px;
+      }
+      button.delete {
+        position: absolute;
+        right: 20px;
+        font-size: 15px;
+      }
+      .check:checked ~ p {
+        text-decoration: line-through;
+        color: rgb(71, 157, 161, 0.4);
+      }
+      .check:checked ~ button {
+        color: rgb(71, 157, 161, 0.4);
+      }
+      .check:checked ~ button {
+        color: rgb(71, 157, 161, 0.4);
+      }
+    </style>
+  </head>
+  <body>
+    <form id="form">
+      <div id="title">Todo List</div>
+      <div id="addItem">
+        <input id="input" placeholder="Add something to do here" />
+        <button type="submit">+</button>
+      </div>
+      <ul id="items">
+        <li class="item">
+          <input class="check" type="checkbox" />
+          <p class="item-content">記得吃飯</p>
+          <button class="delete">X</button>
+        </li>
+        <li class="item">
+          <input class="check" type="checkbox" />
+          <p class="item-content">記得刷牙</p>
+          <button class="delete">X</button>
+        </li>
+        <li class="item">
+          <input class="check" type="checkbox" />
+          <p class="item-content">記得睡覺</p>
+          <button class="delete">X</button>
+        </li>
+      </ul>
+    </form>
+  </body>
+</html>
+
+<script>
+  const form = document.querySelector("#form");
+  const items = document.querySelector("#items");
+
+  items.addEventListener("click", removeItem);
+  form.addEventListener("submit", addItem);
+
+  //把新做的拿到最前面
+  let order = -1;
+
+  function addItem(e) {
+    e.preventDefault();
+    //做新的li
+    const li = document.createElement("li");
+    li.className = "item";
+    li.style["order"] = order;
+    order--;
+    //做新的確認按鈕
+    const checkBtn = document.createElement("input");
+    checkBtn.classList.add("check");
+    checkBtn.setAttribute("type", "checkbox");
+    //做新的內容
+    let content = document.createElement("p");
+    const input = document.querySelector("input");
+    const inputValue = input.value.trim();
+    content.classList.add("item-content");
+    content.textContent = inputValue;
+    //做新的刪除按鈕
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "delete";
+    deleteBtn.textContent = "X";
+    //判斷輸入是否有效，若有效成加入Todo List內
+    if (inputValue != "") {
+      li.appendChild(checkBtn);
+      li.appendChild(content);
+      li.appendChild(deleteBtn);
+      document.getElementById("items").appendChild(li);
+      input.value = "";
+    }
+  }
+  function removeItem(e) {
+    if (e.target.classList.contains("delete")) {
+      let li = e.target.parentNode;
+      items.removeChild(li);
+    }
+  }
+</script>
