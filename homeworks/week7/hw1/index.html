@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>新拖延運動報名表單</title>
     <style>
-      .remind {
+      .remind,
+      .remind2 {
         color: red;
         font-size: 14px;
         position: absolute;
@@ -164,40 +165,41 @@
       </div>
       <div class="group required txt user-name">
         <label for="user-name">暱稱</label>
-        <input type="text" placeholder="您的回答" />
+        <input name="name" type="text" placeholder="您的回答" />
         <div class="remind">請輸入暱稱</div>
       </div>
       <div class="group required txt user-email">
         <label for="user-email">電子郵件</label>
-        <input type="text" placeholder="您的電子郵件" />
+        <input name="email" type="text" placeholder="您的電子郵件" />
         <div class="remind">請輸入Email</div>
+        <div class="remind2">請輸入正確的 Email 格式</div>
       </div>
       <div class="group required txt user-mobile">
         <label for="user-mobile">手機號碼</label>
-        <input type="text" placeholder="您的手機號碼" />
+        <input name="phone" type="text" placeholder="您的手機號碼" />
         <div class="remind">請輸入手機號碼</div>
       </div>
       <div class="group required radio register-type">
         <label>報名類型</label>
         <label>
-          <input name="radio" type="radio" value="1" />
+          <input name="type" type="radio" value="1" />
           <span>躺在床上用想像力實作</span>
         </label>
         <label>
-          <input name="radio" type="radio" value="2" />
+          <input name="type" type="radio" value="2" />
           <span>趴在地上滑手機找現成的</span>
         </label>
         <div class="remind">請選擇報名類型</div>
       </div>
       <div class="group required txt knowing-source">
         <label for="knowing-source">怎麼知道這個活動的？</label>
-        <input type="text" placeholder="您的回答" />
+        <input name="source" type="text" placeholder="您的回答" />
         <div class="remind">請告訴我們您是怎麼知道這個活動的</div>
       </div>
       <div class="group optional txt other">
         <div class="other">其他</div>
         <h2>對活動的一些建議</h2>
-        <input type="text" placeholder="您的回答" />
+        <input name="other" type="text" placeholder="您的回答" />
       </div>
       <div class="btn-group">
         <button type="submit">提交</button>
@@ -212,58 +214,59 @@
   <script>
     const form = document.querySelector("form");
     form.addEventListener("submit", check);
+    function isEmail(email) {
+      var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if (!regex.test(email)) {
+        return false;
+      } else {
+        return true;
+      }
+    }
     function check(e) {
       e.preventDefault();
       const groups = document.querySelectorAll(".group");
-      const RequiredValues = [];
-      const OptionalValues = [];
+      const values = {};
+      let hasError = false;
       for (group of groups) {
         const isTxt = group.classList.contains("txt");
         const isRadio = group.classList.contains("radio");
         const isRequired = group.classList.contains("required");
-        const isOptional = group.classList.contains("optional");
+        const isEmail = group.classList.contains("user-email");
+        const remind = group.querySelector(".remind");
+        const remind2 = group.querySelector(".remind2");
         if (isTxt) {
-          let inputValue = group.querySelector('input[type="text"]').value.trim();
+          const input = group.querySelector('input[type="text"]');
+          const inputValue = input.value.trim();
           if (isRequired) {
-            if (!inputValue) {
-              group.querySelector(".remind").classList.add("show");
+            if (inputValue) {
+              remind.classList.remove("show");
+              values[input.name] = inputValue;
             } else {
-              group.querySelector(".remind").classList.remove("show");
-              RequiredValues.push(inputValue);
+              remind.classList.add("show");
+              hasError = true;
             }
-          }
-          if (isOptional) {
-            OptionalValues.push(inputValue);
+          } else if (inputValue) {
+            values[input.name] = inputValue;
           }
         }
         if (isRadio) {
-          if (isRequired) {
-            const types = group.querySelectorAll('input[type="radio"]');
-            let checkType;
-            for (type of types) {
-              if (type.checked) {
-                checkType = type;
-                group.querySelector(".remind").classList.remove("show");
-                RequiredValues.push(checkType.value);
-              }
-            }
-            if (!checkType) {
-              group.querySelector(".remind").classList.add("show");
+          const types = group.querySelectorAll('input[type="radio"]');
+          let checkType;
+          for (type of types) {
+            if (type.checked) {
+              checkType = type;
+              remind.classList.remove("show");
+              values[type.name] = checkType.value;
             }
           }
-
+          if (!checkType) {
+            remind.classList.add("show");
+            hasError = true;
+          }
         }
       }
-      if (RequiredValues.length == 5) {
-        const data = {
-          name: RequiredValues[0],
-          email: RequiredValues[1],
-          phone: RequiredValues[2],
-          type: RequiredValues[3],
-          source: RequiredValues[4],
-          other: OptionalValues[0],
-        };
-        alert(JSON.stringify(data));
+      if (!hasError) {
+        alert(JSON.stringify(values));
       }
     }
   </script>
@@ -316,5 +319,4 @@
       }
     }
   </script> -->
-
 </html>
