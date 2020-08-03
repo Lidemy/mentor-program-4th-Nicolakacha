@@ -178,6 +178,7 @@
         <label for="user-mobile">手機號碼</label>
         <input name="phone" type="text" placeholder="您的手機號碼" />
         <div class="remind">請輸入手機號碼</div>
+        <div class="remind2">請輸入正確的手機號碼格式</div>
       </div>
       <div class="group required radio register-type">
         <label>報名類型</label>
@@ -222,6 +223,14 @@
         return true;
       }
     }
+    function isPhone(phone) {
+      var regex = /^09\d{2}-?\d{3}-?\d{3}$/;
+      if (!regex.test(phone)) {
+        return false;
+      } else {
+        return true;
+      }
+    }
     function check(e) {
       e.preventDefault();
       const groups = document.querySelectorAll(".group");
@@ -231,33 +240,76 @@
         const isTxt = group.classList.contains("txt");
         const isRadio = group.classList.contains("radio");
         const isRequired = group.classList.contains("required");
-        const isEmail = group.classList.contains("user-email");
         const remind = group.querySelector(".remind");
+        const remind2 = group.querySelector(".remind2");
+
+        //輸入是 text 格式時
         if (isTxt) {
           const input = group.querySelector('input[type="text"]');
           const inputValue = input.value.trim();
+          //是必填欄位時，判斷資料是否有效
           if (isRequired) {
-            if (inputValue) {
+            const name = group.querySelector("input").getAttribute("name");
+            //phone 欄位確認
+            if (name === "phone") {
+              if (isPhone(inputValue)) {
+                remind.classList.remove("show");
+                remind2.classList.remove("show");
+                values[input.name] = inputValue;
+              } else if (inputValue){
+                remind.classList.remove("show");
+                remind2.classList.add("show");
+                hasError = true;
+              } else if (!inputValue) {
+                remind.classList.add("show");
+                remind2.classList.remove("show");
+                hasError = true;                
+              }
+            }
+            //email 欄位確認
+            else if (name === "email") {
+              if (isEmail(inputValue)) {
+                remind.classList.remove("show");
+                remind2.classList.remove("show");
+                values[input.name] = inputValue;
+              } else if (inputValue){
+                remind.classList.remove("show");
+                remind2.classList.add("show");
+                hasError = true;
+              } else if (!inputValue) {
+                remind.classList.add("show");
+                remind2.classList.remove("show");
+                hasError = true;                
+              }
+            }
+            // 其他必填欄位有填寫時
+            else if (inputValue) {
               remind.classList.remove("show");
               values[input.name] = inputValue;
-            } else {
+            }
+            //必填欄位沒填寫時的處理
+            else if (!inputValue) {
               remind.classList.add("show");
               hasError = true;
             }
+            //不是必填欄位時，若有輸入資料，就直接儲存
           } else if (inputValue) {
             values[input.name] = inputValue;
           }
         }
+        //判斷 radio 是否有勾選
         if (isRadio) {
           const types = group.querySelectorAll('input[type="radio"]');
           let checkType;
           for (type of types) {
+            //若有勾選，則存取勾選項目的 value
             if (type.checked) {
               checkType = type;
               remind.classList.remove("show");
               values[type.name] = checkType.value;
             }
           }
+          //若無勾選擇出現提醒
           if (!checkType) {
             remind.classList.add("show");
             hasError = true;

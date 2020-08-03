@@ -154,6 +154,7 @@
     node.innerHTML = html;
     if (inputValue !== "") {
       document.querySelector(".items").prepend(node);
+      document.querySelector("input").value = "";
     }
   }
   function removeItem(e) {
