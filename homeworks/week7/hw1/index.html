@@ -223,8 +223,7 @@
         const isRequired = group.classList.contains("required");
         const isOptional = group.classList.contains("optional");
         if (isTxt) {
-          const input = group.querySelector('input[type="text"]');
-          const inputValue = input.value.trim()
+          let inputValue = group.querySelector('input[type="text"]').value.trim();
           if (isRequired) {
             if (!inputValue) {
               group.querySelector(".remind").classList.add("show");
