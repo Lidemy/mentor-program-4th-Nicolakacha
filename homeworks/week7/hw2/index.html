@@ -9,10 +9,10 @@
       document.addEventListener("DOMContentLoaded", function () {
         const questions = document.querySelector(".questions");
         questions.addEventListener("click", function (e) {
-          let target = e.target.closest(".group").id;
+          let target = e.target.closest(".group").getAttribute("data-id");
           document
             .querySelectorAll(".answer")
-            [e.target.closest(".group").id].classList.toggle("hide");
+            [target].classList.toggle("hide");
         });
       });
     </script>
@@ -227,6 +227,7 @@
         text-align: left;
       }
       .questions hr {
+        border-style: solid;
         border-color: cyan;
       }
       .hide {
@@ -331,6 +332,9 @@
         .section {
           max-height: 2000px;
         }
+        .questions .section {
+          text-align: left;
+        }
       }
     </style>
   </head>
@@ -353,7 +357,7 @@
       <div class="wrap">
         <div class="section">
           <h2 class="section__title">FAQ - 常見問題</h2>
-          <div class="group" id="0">
+          <div class="group" data-id="0">
             <div class="question">
               <div>Q1:</div>
               <div class="question__text">請問團體用餐可以併桌嗎？</div>
@@ -363,7 +367,7 @@
             一般來說，座位安排會視現場狀況而定的，若您有特別的預算可以加錢，還請於訂位時告知訂位人員。
           </div>
           <hr />
-          <div class="group" id="1">
+          <div class="group" data-id="1">
             <div class="question">
               <div>Q2:</div>
               <div class="question__text">請問自帶酒水需要收開瓶費嗎？</div>
@@ -373,7 +377,7 @@
             本公司自帶酒水，不收任開瓶費，但要跟老闆喝一杯。
           </div>
           <hr />
-          <div class="group" id="2">
+          <div class="group" data-id="2">
             <div class="question">
               <div>Q3:</div>
               <div class="question__text">請問有預留位置給現場客人嗎？</div>
@@ -383,7 +387,7 @@
             非假日的時候我們都有充足的位置的，請您不用擔心。假日人潮較多的時段，我們會看長相決定是否開放現場客戶用餐。
           </div>
           <hr />
-          <div class="group" id="3">
+          <div class="group" data-id="3">
             <div class="question">
               <div>Q4:</div>
               <div class="question__text">
@@ -395,7 +399,7 @@
             我們目前沒有提供信用卡優惠方案哦！用振興券的話可以找零。
           </div>
           <hr />
-          <div class="group" id="4">
+          <div class="group" data-id="4">
             <div class="question">
               <div>Q5:</div>
               <div class="question__text">請問是否有提供素食？</div>
@@ -405,7 +409,7 @@
             各店皆有提供素食套餐，自助餐為七十八道菜色，亦為無限供應。
           </div>
           <hr />
-          <div class="group" id="5">
+          <div class="group" data-id="5">
             <div class="question">
               <div>Q6:</div>
               <div class="question__text">請問是否可以使用國民旅遊卡？</div>
@@ -415,7 +419,7 @@
             可以是可以啦，只是服務費要加 30%。
           </div>
           <hr />
-          <div class="group" id="6">
+          <div class="group" data-id="6">
             <div class="question">
               <div>Q7:</div>
               <div class="question__text">請問各餐次有限定用餐時間嗎？</div>

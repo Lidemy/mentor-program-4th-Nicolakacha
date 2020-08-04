@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>新拖延運動報名表單</title>
     <style>
-      .remind {
+      .remind,
+      .remind2 {
         color: red;
         font-size: 14px;
         position: absolute;
         bottom: -20px;
-      }
-      .hide {
         display: none;
+      }
+      .show {
+        display: block;
       }
       .user-name,
       .user-email,
@@ -67,7 +69,6 @@
       input:focus {
         outline: transparent;
       }
-
       .form {
         position: relative;
         border: 0.5px solid #eef;
@@ -155,7 +156,6 @@
   </head>
 
   <body>
-
     <form class="form">
       <div class="title">
         <h1>新拖延運動報名表單</h1>
@@ -163,42 +163,44 @@
         <p>活動地點：台北市大安區新生南路二段1號</p>
         <p class="notice">* 必填</p>
       </div>
-      <div class="group user-name">
+      <div class="group required txt user-name">
         <label for="user-name">暱稱</label>
-        <input type="text" id="user-name" placeholder="您的回答" />
-        <div class="remind hide">請輸入暱稱</div>
+        <input name="name" type="text" placeholder="您的回答" />
+        <div class="remind">請輸入暱稱</div>
       </div>
-      <div class="group user-email">
+      <div class="group required txt user-email">
         <label for="user-email">電子郵件</label>
-        <input type="text" id="user-email" placeholder="您的電子郵件" />
-        <div class="remind hide">請輸入Email</div>
+        <input name="email" type="text" placeholder="您的電子郵件" />
+        <div class="remind">請輸入Email</div>
+        <div class="remind2">請輸入正確的 Email 格式</div>
       </div>
-      <div class="group user-mobile">
+      <div class="group required txt user-mobile">
         <label for="user-mobile">手機號碼</label>
-        <input type="text" id="user-mobile" placeholder="您的手機號碼" />
-        <div class="remind hide">請輸入手機號碼</div>
+        <input name="phone" type="text" placeholder="您的手機號碼" />
+        <div class="remind">請輸入手機號碼</div>
+        <div class="remind2">請輸入正確的手機號碼格式</div>
       </div>
-      <div class="group register-type">
+      <div class="group required radio register-type">
         <label>報名類型</label>
         <label>
-          <input name="radio" type="radio" value="1" />
+          <input name="type" type="radio" value="1" />
           <span>躺在床上用想像力實作</span>
         </label>
         <label>
-          <input name="radio" type="radio" value="2" />
+          <input name="type" type="radio" value="2" />
           <span>趴在地上滑手機找現成的</span>
         </label>
-        <div class="remind hide">請選擇報名類型</div>
+        <div class="remind">請選擇報名類型</div>
       </div>
-      <div class="group knowing-source">
+      <div class="group required txt knowing-source">
         <label for="knowing-source">怎麼知道這個活動的？</label>
-        <input type="text" id="knowing-source" placeholder="您的回答" />
-        <div class="remind hide">請告訴我們您是怎麼知道這個活動的</div>
+        <input name="source" type="text" placeholder="您的回答" />
+        <div class="remind">請告訴我們您是怎麼知道這個活動的</div>
       </div>
-      <div class="group other">
+      <div class="group optional txt other">
         <div class="other">其他</div>
         <h2>對活動的一些建議</h2>
-        <input type="text" id="other" placeholder="您的回答" />
+        <input name="other" type="text" placeholder="您的回答" />
       </div>
       <div class="btn-group">
         <button type="submit">提交</button>
@@ -208,10 +210,119 @@
     <footer>
       <p>© 2020 © Copyright. All rights Reserved.</p>
     </footer>
-
   </body>
 
   <script>
+    const form = document.querySelector("form");
+    form.addEventListener("submit", check);
+    function isEmail(email) {
+      var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      if (!regex.test(email)) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    function isPhone(phone) {
+      var regex = /^09\d{2}-?\d{3}-?\d{3}$/;
+      if (!regex.test(phone)) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+    function check(e) {
+      e.preventDefault();
+      const groups = document.querySelectorAll(".group");
+      const values = {};
+      let hasError = false;
+      for (group of groups) {
+        const isTxt = group.classList.contains("txt");
+        const isRadio = group.classList.contains("radio");
+        const isRequired = group.classList.contains("required");
+        const remind = group.querySelector(".remind");
+        const remind2 = group.querySelector(".remind2");
+
+        //輸入是 text 格式時
+        if (isTxt) {
+          const input = group.querySelector('input[type="text"]');
+          const inputValue = input.value.trim();
+          //是必填欄位時，判斷資料是否有效
+          if (isRequired) {
+            const name = group.querySelector("input").getAttribute("name");
+            //phone 欄位確認
+            if (name === "phone") {
+              if (isPhone(inputValue)) {
+                remind.classList.remove("show");
+                remind2.classList.remove("show");
+                values[input.name] = inputValue;
+              } else if (inputValue){
+                remind.classList.remove("show");
+                remind2.classList.add("show");
+                hasError = true;
+              } else if (!inputValue) {
+                remind.classList.add("show");
+                remind2.classList.remove("show");
+                hasError = true;                
+              }
+            }
+            //email 欄位確認
+            else if (name === "email") {
+              if (isEmail(inputValue)) {
+                remind.classList.remove("show");
+                remind2.classList.remove("show");
+                values[input.name] = inputValue;
+              } else if (inputValue){
+                remind.classList.remove("show");
+                remind2.classList.add("show");
+                hasError = true;
+              } else if (!inputValue) {
+                remind.classList.add("show");
+                remind2.classList.remove("show");
+                hasError = true;                
+              }
+            }
+            // 其他必填欄位有填寫時
+            else if (inputValue) {
+              remind.classList.remove("show");
+              values[input.name] = inputValue;
+            }
+            //必填欄位沒填寫時的處理
+            else if (!inputValue) {
+              remind.classList.add("show");
+              hasError = true;
+            }
+            //不是必填欄位時，若有輸入資料，就直接儲存
+          } else if (inputValue) {
+            values[input.name] = inputValue;
+          }
+        }
+        //判斷 radio 是否有勾選
+        if (isRadio) {
+          const types = group.querySelectorAll('input[type="radio"]');
+          let checkType;
+          for (type of types) {
+            //若有勾選，則存取勾選項目的 value
+            if (type.checked) {
+              checkType = type;
+              remind.classList.remove("show");
+              values[type.name] = checkType.value;
+            }
+          }
+          //若無勾選擇出現提醒
+          if (!checkType) {
+            remind.classList.add("show");
+            hasError = true;
+          }
+        }
+      }
+      if (!hasError) {
+        alert(JSON.stringify(values));
+      }
+    }
+  </script>
+
+  <!-- <script>
     const form = document.querySelector("form");
     form.addEventListener("submit", check);
     function check(e) {
@@ -258,5 +369,5 @@
         alert(JSON.stringify(info));
       }
     }
-  </script>
+  </script> -->
 </html>
