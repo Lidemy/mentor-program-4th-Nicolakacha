@@ -17,6 +17,7 @@
   z-index: 2;
   height: 55px;
   background-color: #fff;
+  overflow: hidden;
 }
 
 .nav .site {
@@ -129,6 +130,7 @@
 
 @media (max-width: 768px) {
   .nav {
+    padding: 0;
     flex-direction: column;
     height: auto;
   }
@@ -138,11 +140,9 @@
   }
   .nav ul {
     margin-top: 10px;
-    padding: 0 4px;
   }
   .nav li {
-    display: inline;
-    padding: 10px 16px;
+    padding: 10px 10px;
   }
   .container {
     margin-top: 10vh;
