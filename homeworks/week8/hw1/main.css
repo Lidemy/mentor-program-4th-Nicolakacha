@@ -276,8 +276,8 @@ footer {
   width: 500px;
   height: 100%;
   border-radius: 16px;
-  margin: 10vh 2vh;
-  padding: 40px 0px;
+  margin: 4vh 2vh;
+  padding: 5vh 0;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -285,18 +285,18 @@ footer {
 .games .part {
   width: 100%;
   display: flex;
-  padding: 20px 0;
+  padding: .5rem 0;
   justify-content: space-around;
 }
 .games h2 {
-  margin-bottom: 30px;
+  margin-bottom: .7rem;
   color: #5ec1b6;
   text-align: center;
   font-size: 1.5rem;
 }
 .games h3 {
   width: 20%;
-  margin-right: 10px;
+  margin-right: 4vh;
   color: #322929;
   font-size: 1.2rem;
   font-weight: 800;
@@ -331,7 +331,8 @@ footer {
   background-color: hsl(351, 79%, 60%);
 }
 .prize {
-  margin: 20vh 2vh;
+  height: 100px;
+  margin: 30vh 2vh;
   padding: 30px 10px;
   justify-content: center;
   background-color: rgb(228, 228, 228, 0.4);
@@ -396,17 +397,13 @@ footer {
     text-align: left;
   }
   .games h2 {
-    margin-bottom: 5px;
-    padding: 0 20px;
+    padding: 0 1vh;
   }
   .games h3 {
     width: 30%;
   }
-  .games .part div {
-    margin-left: -60px;
-  }
-  .games .prize {
-    margin: 25vh 5vh;
+  .container {
+    margin: 15vh 2vh;
   }
   .footer__top {
     padding: 5px;
@@ -414,5 +411,10 @@ footer {
   }
   .footer__top .wrap {
     flex-direction: column-reverse;
+  }
+  @media (max-width: 420px) {
+    .container {
+      margin: 10vh 2vh 2vh 2vh;
+    }
   }
 }
