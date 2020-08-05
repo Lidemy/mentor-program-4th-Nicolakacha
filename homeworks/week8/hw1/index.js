@@ -34,10 +34,12 @@ function getPrice() {
           prize.innerHTML = '恭喜你抽中三獎：知名 YouTuber 簽名握手會入場券一張，bang！';
         } else {
           alert('系統不穩定，請再試一次');
+          window.location.reload(true);
         }
       } else {
         alert('系統不穩定，請再試一次');
         console.log('error');
+        window.location.reload(true);
       }
     };
     xhr.onerror = () => {
