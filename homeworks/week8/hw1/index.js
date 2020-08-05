@@ -1,5 +1,4 @@
 /* eslint-disable no-alert */
-
 function documentReady() {
   function error() {
     alert('系統不穩定，請再試一次');
