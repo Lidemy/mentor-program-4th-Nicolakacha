@@ -9,31 +9,29 @@ function getPrice() {
       if ((xhr.status >= 200) && (xhr.status < 400)) {
         const value = JSON.parse(xhr.responseText).prize;
         const games = document.querySelector('.games');
-        const game = document.querySelector('.game');
-        const prize = document.querySelector('.prize');
-        const prizeName = document.querySelector('.prize__name');
+        const prize = document.querySelector('.prize__name');
+        const hide = function hide() {
+          document.querySelector('.game').classList.add('hide');
+          document.querySelector('.prize').classList.remove('hide');
+        };
         if (value === 'NONE') {
           games.style.background = 'black';
-          game.classList.add('hide');
-          prize.classList.remove('hide');
-          prize.style.background = 'transparent';
-          prizeName.innerHTML = '銘謝惠顧';
-          prizeName.style.color = 'white';
+          hide();
+          prize.parentNode.style.background = 'transparent';
+          prize.innerHTML = '銘謝惠顧';
+          prize.style.color = 'white';
         } else if (value === 'FIRST') {
           games.style.background = 'url("firstPrize.jpg") center / cover no-repeat';
-          game.classList.add('hide');
-          prize.classList.remove('hide');
-          prizeName.innerHTML = '恭喜你中頭獎了！日本東京來回雙人遊！';
+          hide();
+          prize.innerHTML = '恭喜你中頭獎了！日本東京來回雙人遊！';
         } else if (value === 'SECOND') {
           games.style.background = 'url("SecondPrize.jpg") center / cover no-repeat';
-          game.classList.add('hide');
-          prize.classList.remove('hide');
-          prizeName.innerHTML = '二獎！90 吋電視一台！';
+          hide();
+          prize.innerHTML = '二獎！90 吋電視一台！';
         } else if (value === 'THIRD') {
           games.style.background = 'url("ThirdPrize.jpg") center / cover no-repeat';
-          game.classList.add('hide');
-          prize.classList.remove('hide');
-          prizeName.innerHTML = '恭喜你抽中三獎：知名 YouTuber 簽名握手會入場券一張，bang！';
+          hide();
+          prize.innerHTML = '恭喜你抽中三獎：知名 YouTuber 簽名握手會入場券一張，bang！';
         } else {
           alert('系統不穩定，請再試一次');
         }
@@ -53,7 +51,7 @@ function getPrice() {
     );
     xhr.send();
   });
-
+  document.querySelector('.play__game').disable = true;
   reload.addEventListener('click', () => {
     window.location.reload(true);
   });
