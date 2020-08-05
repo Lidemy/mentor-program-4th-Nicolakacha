@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 
-function loadPage() {
+function documentReady() {
   function error() {
     alert('系統不穩定，請再試一次');
     window.location.reload(true);
@@ -35,7 +35,7 @@ function loadPage() {
       error();
     }
   }
-  document.querySelector('.play__game').addEventListener('click', () => {
+  function getAPI() {
     const api = 'https://dvwhnbka7d.execute-api.us-east-1.amazonaws.com/default/lottery';
     const xhr = new XMLHttpRequest();
     xhr.onload = () => {
@@ -53,9 +53,11 @@ function loadPage() {
     xhr.onerror = () => { error(); };
     xhr.open('GET', api, true);
     xhr.send();
-  });
-  document.querySelector('.reload').addEventListener('click', () => {
+  }
+  function reload() {
     window.location.reload(true);
-  });
+  }
+  document.querySelector('.play__game').addEventListener('click', getAPI);
+  document.querySelector('.reload').addEventListener('click', reload);
 }
-document.addEventListener('DOMContentLoaded', loadPage);
+document.addEventListener('DOMContentLoaded', documentReady);
