@@ -11,14 +11,14 @@
 .nav {
   display: flex;
   position: fixed;
-  padding: 0 40px;
+  padding: 0 40px 0 10px;
   width: 100%;
   height: 55px;
   top: 0;
   align-items: center;
-  box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+  box-shadow: 0px 2px 2px 0 black;
   z-index: 2;
-  background-color: #fff;
+  background-color: #000;
   overflow: hidden;
 }
 
@@ -28,9 +28,10 @@
   font-weight: 800;
   text-transform: uppercase;
   cursor: pointer;
+  color: white;
 }
 .nav .site:hover {
-  color: rgb(100, 100, 100);
+  color: orange;
 }
 .nav ul {
   display: flex;
@@ -42,12 +43,25 @@
   cursor: pointer;
   align-items: center;
   font-size: 0.9rem;
-  transition: background-color 0.2s linear;
-}
-.nav li:hover {
-  background-color: rgb(50, 50, 50);
   color: white;
+  transition: all 0.2s linear;
 }
+
+
+.nav li:hover {
+  color: orange;
+  animation: shake .6s;
+}
+
+@keyframes shake{
+  0%{
+    transform: rotate(3deg);
+  }
+  50%{
+    transform: rotate(-3deg);
+  }
+}
+
 .main {
   background-image: linear-gradient(135deg, #000000, #696969);
   padding-bottom: 20px;
