@@ -82,7 +82,7 @@
 }
 
 .main {
-  background-image: linear-gradient(135deg, #000000, #696969);
+  background-image: linear-gradient(135deg, #000000, #353535);
   padding-bottom: 20px;
   min-height: 100vh;
 }
@@ -234,18 +234,22 @@
   width: 5vh;
   height: 5vh;
   line-height: 5vh;
-  background-color: black;
+  background-color: rgb(221, 221, 221);
   position: fixed;
   bottom: 65px;
   right: 50px;
   text-align: center;
   font-size: 1.5rem;
-  opacity: 0.4;
+  opacity: 0.2;
 }
 
 .go-top a {
   text-decoration: none;
-  color: white;
+  color: black;
+}
+
+.go-top:hover a {
+  color: rgb(145, 71, 255);
 }
 
 @media (max-width: 768px) {
