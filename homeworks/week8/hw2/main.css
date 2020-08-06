@@ -32,7 +32,27 @@
 }
 .nav .site:hover {
   color: orange;
+  animation: move 1s;
 }
+
+@keyframes move{
+  0%{
+    letter-spacing: .5px;
+  }
+  20%{
+    letter-spacing: 1px;
+  }
+  40%{
+    letter-spacing: .5px;
+  }
+  60%{
+    letter-spacing: 1px;
+  }
+  100%{
+    letter-spacing: 0px;
+  }
+}
+
 .nav ul {
   display: flex;
   justify-content: flex-end;
@@ -58,7 +78,7 @@
     transform: rotate(3deg);
   }
   50%{
-    transform: rotate(-3deg);
+    transform: rotate(-2deg);
   }
 }
 
@@ -194,6 +214,10 @@
   padding: 0 10px;
   color: white;
   font-size: 1.2rem;
+}
+
+.footer .social-media a:hover{
+  color: orange;
 }
 
 .go-top {
