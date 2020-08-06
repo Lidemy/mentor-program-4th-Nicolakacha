@@ -1,9 +1,11 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
+
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   list-style: none;
   font-family: "Microsoft JhengHei";
-  box-sizing: border-box;
 }
 
 .nav {
@@ -11,21 +13,21 @@
   position: fixed;
   padding: 0 40px;
   width: 100%;
+  height: 55px;
   top: 0;
   align-items: center;
   box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
   z-index: 2;
-  height: 55px;
   background-color: #fff;
   overflow: hidden;
 }
 
 .nav .site {
-  cursor: pointer;
   margin: 0 auto 0 20px;
   font-size: 1.3rem;
   font-weight: 800;
   text-transform: uppercase;
+  cursor: pointer;
 }
 .nav .site:hover {
   color: rgb(100, 100, 100);
@@ -46,11 +48,13 @@
   background-color: rgb(50, 50, 50);
   color: white;
 }
-.background {
+.main {
   background-image: linear-gradient(135deg, #000000, #696969);
+  padding-bottom: 20px;
+  min-height: 100vh;
 }
 .container {
-  width: 100%;
+  max-width: 1440px;
   margin: 5px auto 10px;
   padding: 3%;
   box-sizing: border-box;
@@ -58,29 +62,57 @@
 }
 
 .intro {
+  margin: 50px 0 20px;
   text-align: center;
   line-height: 3rem;
-  margin: 50px 0 20px;
   color: white;
 }
 
+.intro h1{
+  text-transform: uppercase;
+}
+
+.neon-effect {
+  color:#fff;
+  letter-spacing:2px;
+  text-shadow:
+  0 0 5px rgba(247, 245, 41,.1),
+  0 0 10px rgba(247, 245, 41,1),
+  0 0 20px rgba(247, 245, 41,1),
+  0 0 40px rgba(247, 245, 41,1);
+ animation:neon-shine 2s 1s linear infinite;
+}
+
+@keyframes neon-shine{
+  0%{opacity:1;}
+  90%{opacity:0;}
+  100%{color:#232323;}
+}
+
 .streams {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-gap: 30px;
+  text-align: center;
 }
 
 .stream {
-  width: 360px;
-  margin: 20px 15px;
+  position: relative;
+  margin: 5px 0;
   background-color: rgb(51, 51, 51);
   transition: all .2s linear;
+  filter: brightness(0.8);
+  cursor: pointer;
 }
 
 .stream:hover {
-  transform: scale(1.07);
-  filter: brightness(1.5);
-  box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.5);
+  transform: translateY(-5%);
+  filter: brightness(1.1);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.stream a{
+  text-decoration: none;
 }
 
 .stream .info{
@@ -109,7 +141,7 @@
 }
 
 .stream .txt {
-  width: 245px;
+  width: 90%;
   margin-left: 10px;
   padding: 5px 0px;
   font-weight: 400; 
@@ -121,11 +153,51 @@
 }
 
 .stream .txt .title{
+  margin-bottom: 5px;
   font-size: 1.1rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-bottom: 5px;
+}
+
+.footer {
+  display: flex;
+  padding: 5px 20px;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  color: white;
+  background-color: black;
+  line-height: 40px;
+}
+
+.footer p {
+  margin-right: auto;
+  padding-left: 10px;
+}
+
+.footer .social-media a{
+  padding: 0 10px;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.go-top {
+  width: 5vh;
+  height: 5vh;
+  line-height: 5vh;
+  background-color: black;
+  position: fixed;
+  bottom: 65px;
+  right: 50px;
+  text-align: center;
+  font-size: 1.5rem;
+  opacity: .4;
+}
+
+.go-top a{
+ text-decoration: none;
+ color: white;
 }
 
 @media (max-width: 768px) {
