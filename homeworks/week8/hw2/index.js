@@ -18,7 +18,7 @@ function getTopGames(cb) {
 }
 function getStreams(game, cb) {
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `${APIUrl}/streams?game=${encodeURIComponent(game)}`, true);
+  xhr.open('GET', `${APIUrl}/streams?game=${encodeURIComponent(game)}&limit=20`, true);
   xhr.setRequestHeader('Accept', accept);
   xhr.setRequestHeader('Client-ID', clientId);
   xhr.onload = () => {
