@@ -416,5 +416,9 @@ footer {
     .container {
       margin: 10vh 2vh 2vh 2vh;
     }
+    .container.prize {
+      margin-top: 30vh;
+      padding: 50px 0;
+    }
   }
 }
