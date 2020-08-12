@@ -263,9 +263,11 @@
   }
   .nav li {
     padding: 10px 10px;
+    font-size: .6rem;
+    text-align: center;
   }
   .container {
-    margin-top: 10vh;
+    margin-top: 8vh;
     padding-top: 1vh;
   }
 }
