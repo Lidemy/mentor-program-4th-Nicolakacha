@@ -23,11 +23,11 @@ function documentReady() {
       hide();
       prize.innerHTML = '恭喜你中頭獎了！日本東京來回雙人遊！';
     } else if (value === 'SECOND') {
-      games.style.background = 'url("SecondPrize.jpg") center / cover no-repeat';
+      games.style.background = 'url("secondPrize.jpg") center / cover no-repeat';
       hide();
       prize.innerHTML = '二獎！90 吋電視一台！';
     } else if (value === 'THIRD') {
-      games.style.background = 'url("ThirdPrize.jpg") center / cover no-repeat';
+      games.style.background = 'url("thirdPrize.jpg") center / cover no-repeat';
       hide();
       prize.innerHTML = '恭喜你抽中三獎：知名 YouTuber 簽名握手會入場券一張，bang！';
     } else {

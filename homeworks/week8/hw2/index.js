@@ -33,28 +33,28 @@ function getStreams(game, cb) {
 }
 function renderStreams(streams) {
   streams.streams.forEach((stream) => {
-    console.log(stream);
-    const preview = stream.preview.large;
-    const picture = stream.channel.logo;
-    const title = stream.channel.status;
-    const channel = stream.channel.name;
-    const link = stream.channel.url;
-    const { game } = stream;
+    const {
+      game,
+      preview: { large },
+      channel: {
+        logo, status, name, url,
+      },
+    } = stream;
     const template = `
-    <a target="_blank" href="${link}">
-      <div class="preview">
-        <img src="${preview}" alt="stream" />
-      </div>
-      <div class="info">
-        <div class="photo">
-          <img src="${picture}" alt="photo" />
+      <a target="_blank" href="${url}">
+        <div class="preview">
+          <img src="${large}" alt="stream" />
         </div>
-        <div class="txt">
-          <div class="title">${title}</div>
-          <div class="channel">${channel}</div>
+        <div class="info">
+          <div class="photo">
+            <img src="${logo}" alt="photo" />
+          </div>
+          <div class="txt">
+            <div class="title">${status}</div>
+            <div class="channel">${name}</div>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
     `;
     const element = document.createElement('div');
     element.classList.add('stream');
@@ -66,10 +66,12 @@ function renderStreams(streams) {
 
 function documentReady() {
   getTopGames((data) => {
-    const games = document.querySelectorAll('li');
-    for (let i = 0; i < games.length; i += 1) {
-      games[i].innerHTML = data.top[i].game.name;
-    }
+    data.top.forEach((top) => {
+      const li = document.createElement('li');
+      li.innerHTML = top.game.name;
+      document.querySelector('.games').appendChild(li);
+    });
+
     document.querySelector('.intro h1').innerHTML = data.top[0].game.name;
     getStreams(data.top[0].game.name, renderStreams);
     document.querySelector('.games').addEventListener('click', (e) => {
