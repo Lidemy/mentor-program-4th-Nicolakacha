@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
+
+:root {
+  --main-color: #000;
+  --main-bg-color: #fff;
+  --background: #ecebd2;
+  --board-background: #f5f5f5;
+  --warning: #c2dffb; 
+  --border: #c2dffb; 
+  --title: #7777e6;
+  --remind: #ff0000;
+}
+
+[data-theme="dark"] {
+  --main-color: rgb(189, 189, 189);
+  --main-bg-color: #000;
+  --background: #161616;
+  --board-background: #141010;
+  --warning: #000407; 
+  --border: #003566; 
+  --title: #a7a7ec;
+  --remind: rgb(252, 106, 131);
+}
+
+
+body {
+  margin: 0;
+  background: var(--background);
+  font-family: 'Ubuntu', sans-serif;
+  color: var(--main-color);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.warning { 
+  background: var(--warning);
+  padding: 10px;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.theme-switch-wrapper {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.toggle-icon {
+  margin-right: 8px;
+  color: var(--title);
+}
+
+.theme-switch {
+  display: inline-block;
+  height: 24px;
+  position: relative;
+  width: 40px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+}
+
+.slider::before {
+  background: #fff;
+  bottom: 3.2px;
+  content: "";
+  height: 18px;
+  left: 4px;
+  position: absolute;
+  transition: 0.4s;
+  width: 18px;
+}
+
+input:checked + .slider {
+  background: rgb(83, 83, 83);
+}
+
+input:checked + .slider::before {
+  transform: translateX(14px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round::before {
+  border-radius: 50%;
+}
+
+.fas {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.board {
+  background: var(--board-background);
+  width: 100%;
+  max-width: 650px;
+  margin: 20px auto;
+  padding: 10px 40px;
+  border-radius: 5px;
+}
+
+.board__welcome-message {
+  color: var(--title);
+}
+
+.board.simple {
+  padding-bottom: 30px;
+}
+
+.board__new-comment-form textarea{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  resize: none;
+  outline: none;
+  font-size: 18px;
+  background: var(--main-bg-color);
+  color: var(--title);
+}
+
+.board__title {
+  margin-top: 10px;
+  animation: move 5s infinite;
+}
+
+input {
+  background: var(--main-bg-color);
+  color: var(--title);
+}
+
+.board__row {
+  display: flex;
+  margin-bottom: 14px;
+  font-size: 1rem;
+}
+
+.board__row input {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2px;
+  height: 30px;
+  outline: none;
+  font-size: 15px;
+}
+
+.card {
+  margin: 30px 0;
+  min-height: 70px;
+  display: flex;
+  font-size: 0.9rem;
+}
+
+.card__avatar {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.card__body {
+  margin-left: 10px;
+}
+
+.card__content {
+  margin-top: -15px;
+  min-width: 80%;
+  white-space: pre-line;
+  word-break: break-all;
+}
+
+.card__author {
+  color: var(--title);
+  font-weight: bold;
+}
+
+.card__time {
+  margin-left: 10px;
+  color: #a0a0a0;
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+
+.submit {
+  display: flex;
+  width: 100%;
+  height: 50px;
+}
+
+.remind {
+  font-size: 0.8rem;
+  color: var(--remind);
+}
+
+button {
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  margin: 5px 10px 5px 0;
+  outline: none;
+  background: var(--main-bg-color);
+  color: var(--title);
+  width: 70px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0px 3px 2px var(--border);
+}
+
+button:active{
+  transform: translateY(2px);
+  box-shadow: 0px 1px 2px var(--border);
+  filter: brightness(90%);
+}
+
+.board__hr {
+  margin: 20px auto;
+  width: 100%;
+  border-bottom: .5px solid var(--border);
+  text-align: center;
+}
+
+.nav_btn {
+  margin-left: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: .9rem;
+  color: var(--title);
+}
+
+.nav_btn:hover {
+  filter: brightness(70%);
+}
+
+@keyframes move {
+  0% {
+    letter-spacing: 0px;
+  }
+  10% {
+    letter-spacing: 0px;
+  }
+  15% {
+    letter-spacing: 0px;
+  }
+  20% {
+    letter-spacing: 0px;
+  }
+  25% {
+    letter-spacing: 1.5px;
+  }
+  30% {
+    letter-spacing: 0.5px;
+  }
+  35% {
+    letter-spacing: 1.5px;
+  }
+  40% {
+    letter-spacing: 0px;
+  }
+  100% {
+    letter-spacing: 0px;
+  }
+}
