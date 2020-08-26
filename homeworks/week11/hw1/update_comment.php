@@ -2,17 +2,19 @@
   session_start();
   require_once('inc/conn.php');
   require_once('inc/utils.php');
-  if (!empty($_POST['id'])) {
-    $id = $_POST['id'];
-  } else {
-    $id = $_GET['id'];
+
+  if (empty($_GET['id'])) {
+    header('Location: index.php');
+    exit();
   }
+  if (empty($_GET['CSRFToken'])) {
+    header('Location: index.php');
+    exit();
+  }
+
+  $id = $_GET['id'];
+  $CSRFToken = $_GET['CSRFToken'];
   $row = selectCommentFromComments($id);
-  if (!empty($_POST['CSRFToken'])) {
-    $CSRFToken = $_POST['CSRFToken'];
-  } else {
-    $CSRFToken = $_GET['CSRFToken'];
-  }
 ?>
 
 <?php include('inc/header.php'); ?>
@@ -40,5 +42,5 @@
 
   </main>
 
-  <script src="inc/script.js"></script>
+  <script src="script/script.js"></script>
 <?php include('inc/footer.php'); ?>

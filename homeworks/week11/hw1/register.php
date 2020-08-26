@@ -32,6 +32,6 @@
 
   </main>
 
-  <script src="inc/script.js"></script>
+  <script src="script/script.js"></script>
 <?php include('inc/footer.php'); ?>
 

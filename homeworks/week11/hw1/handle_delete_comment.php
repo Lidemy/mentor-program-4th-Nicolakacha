@@ -12,9 +12,8 @@
   }
 
   $id = $_POST['id'];
-  echo $id;
   if(empty($_POST['id'])) {
-    // header('Location: index.php');
+    header('Location: index.php');
     die();
   }
 

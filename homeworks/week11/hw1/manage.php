@@ -2,7 +2,6 @@
   session_start();
   require_once('inc/conn.php');
   require_once('inc/utils.php');
-
   checkValidAdmin();
   $result = getAllUsers();
 ?>
@@ -65,5 +64,5 @@
 
   </main>
 
-  <script src="inc/script.js"></script>
+  <script src="script/script.js"></script>
 <?php include('inc/footer.php'); ?>
