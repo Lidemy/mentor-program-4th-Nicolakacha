@@ -4,13 +4,17 @@
   require_once('inc/utils.php');
 
   $username = $_SESSION['username'];
-  $username = $_SESSION['username'];
   $user = getUserFromUsername($username);
   $role = $user['role'];
 
-  $id = $_GET['id'];
-  if(empty($_GET['id'])) {
-    header('Location: index.php');
+  if ($_POST["CSRFToken"] != $_COOKIE["CSRFToken"]) {
+    die('You bad bad!');
+  }
+
+  $id = $_POST['id'];
+  echo $id;
+  if(empty($_POST['id'])) {
+    // header('Location: index.php');
     die();
   }
 

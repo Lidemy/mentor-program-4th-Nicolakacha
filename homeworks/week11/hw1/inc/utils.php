@@ -122,7 +122,7 @@
     }   
   }
 
-  function selectCommentFromComments() {
+  function selectCommentFromComments($id) {
     global $conn;
     $username = NULL;
     $user = NULL;
@@ -130,8 +130,6 @@
       $username = $_SESSION['username'];
       $user = getUserFromUsername($username);
     }
-  
-    $id = $_GET['id'];
   
     $stmt = $conn->prepare('SELECT * FROM nicolakacha_comments WHERE id = ?');
     $stmt->bind_param("i", $id);
@@ -146,5 +144,14 @@
 
   function escape($str) {
     return htmlspecialchars($str, ENT_QUOTES);
+  }
+
+  function generateToken($length)
+  {
+    $s = '';
+    for ($i = 1; $i <= $length; $i++) {
+      $s .= chr(rand(65, 90));
+    }
+    return $s;
   }
 ?>

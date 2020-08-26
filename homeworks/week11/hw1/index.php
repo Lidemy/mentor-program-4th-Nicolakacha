@@ -1,7 +1,13 @@
 <?php
   session_start();
   require_once('inc/utils.php');
+  if (!empty($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+  }
   $user = getCurrentUser();
+  if (!empty($_COOKIE["CSRFToken"])) {
+    $CSRFToken = $_COOKIE["CSRFToken"];
+  }
 ?>
 
 <?php include('inc/header.php'); ?>
@@ -53,6 +59,7 @@
       <?php if(!empty($user['username']) && $user['role'] != 0) { ?>
         <form class="board__new-comment-form" method="POST" action="handle_add_comment.php">
           <textarea name="content" rows="5" maxlength="200"></textarea>
+          <input type="hidden" name='CSRFToken' value='<?php echo $CSRFToken ?>'>
           <div class="submit">
             <button type="submit">POST</button>
             <?php checkValidComment() ?>
@@ -86,10 +93,20 @@
               <span class="card__time">
                 <?php  echo escape($row['created_at']); ?>                     
               </span>
-              <?php if ($user['role'] == 2) {
-                echo '<a class="btn__icon" href="update_comment.php?id=' . $row['id'] . '"?><i class="fa fa-pencil" aria-hidden="true"></i></a>'; 
-                echo '<a class="btn__icon" href="handle_delete_comment.php?id=' . $row['id'] . '"?><i class="fa fa-trash-o" aria-hidden="true"></i></a>'; 
-              };?>
+              <?php if ($user['role'] == 2 || $row['username'] === $username) { ?>
+                <span class="ud-form">
+                  <form class= "update_comment_form" method='POST' action='update_comment.php'>
+                    <input type='hidden' name='id' value='<?php echo $row['id'] ?>'>
+                    <input type="hidden" name='CSRFToken' value='<?php echo $CSRFToken ?>'>
+                    <button class='btn__icon' type='submit'><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                  </form>
+                  <form class= "delete_comment_form" method='POST' action='handle_delete_comment.php'>
+                    <input type='hidden' name='id' value='<?php echo $row['id'] ?>'>
+                    <input type="hidden" name='CSRFToken' value='<?php echo $CSRFToken ?>'>
+                    <button class='btn__icon' type='submit'><i class='fa fa-trash-o' aria-hidden='true'></i></button>
+                  </form>
+              </span>
+              <?php } ?>
             </div>
             <p class="card__content"><?php echo escape($row['content']); ?></p>
           </div>

@@ -5,6 +5,7 @@
     header('Location: manage.php');
     die();
   }
+
   $role = $_POST['role'];
   $id = $_POST['id'];
   $sql ="UPDATE nicolakacha_users SET role=? WHERE id=?";

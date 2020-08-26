@@ -293,15 +293,6 @@ nav a:hover {
   font-size: 0.8rem;
 }
 
-.card a.btn__icon{
-  margin-left: 5px;
-  color: var(--border);
-}
-
-.card a.btn__icon:hover{
-  color: var(--title);
-}
-
 nav {
   width: 100%;
   display: flex;
@@ -433,6 +424,33 @@ nav {
   background-color: var(--title);
   color: var(--main-bg-color)
 }
+
+.ud-form {
+  float: right;
+}
+
+form.update_comment_form,
+form.delete_comment_form {
+  display: inline;
+}
+
+.update_comment_form button,
+.delete_comment_form button {
+  margin-left: 5px;
+  color: var(--border);
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+  width: auto;
+  margin: 0;
+  padding-left: 10px;
+}
+
+.update_comment_form button:hover,
+.delete_comment_form button:hover{
+  color: var(--title);
+}
+
 @keyframes move {
   0% {
     letter-spacing: 0px;

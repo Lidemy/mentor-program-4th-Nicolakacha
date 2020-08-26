@@ -2,9 +2,9 @@
   session_start();
   require_once('inc/conn.php');
   require_once('inc/utils.php');
-  
+  $CSRFToken = $_POST['CSRFToken'];
   if(empty($_POST['content'])) {
-    header('Location: update_comment.php?errorCode=1&id='. $_POST['id']);
+    header('Location: update_comment.php?errorCode=1&id='. $_POST['id'] . '&CSRFToken=' . $CSRFToken);
     die();
   }
 
