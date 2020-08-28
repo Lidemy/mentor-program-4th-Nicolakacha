@@ -25,11 +25,14 @@ $row = $result->fetch_assoc();
 if (password_verify($password, $row['password'])) {
   if ($row['username'] != 'admin') {
     header('Location: login.php?errorCode=3');
-    exit();
+    die($conn->error);
   }
   $_SESSION['username'] = $username;
   $CSRFToken = generateToken(10);
   setcookie("CSRFToken", $CSRFToken, time() + 3600 * 240, "/");
   header('Location: admin.php');
+} else {
+  header('Location: login.php?errorCode=2');
+  die($conn->error);
 }
 ?>

@@ -20,7 +20,7 @@
       <h3 class="remind">
         <?php checkValidLogin(); ?>
       </h3>
-      <input type='submit' value="登入" />
+      <input class='login-btn' type='submit' value="登入" />
     </form>
      
   </div>

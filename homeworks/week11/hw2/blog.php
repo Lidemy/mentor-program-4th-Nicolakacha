@@ -4,23 +4,22 @@ require_once('inc/utils.php');
 session_start();
 
 $id = $_GET['id'];
-$stmt = $conn->prepare("SELECT * FROM nicolakacha_blog_articles WHERE id=?");
-$stmt->bind_param('i', $id);
-$result = $stmt->execute();
-if (!$result) {
-  die($conn->error);
-}
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
+
+// get single article
+$row = getArticle($id);
 ?>
 
 <?php include_once('inc/header.php')?>
 
+  <!-- show article content -->
   <div class="container-wrapper">
     <div class="posts">
       <article class="post">
         <div class="post__header">
-          <div><?php echo escape($row['title']); ?></div>
+          <div>
+          <?php echo '[' . escape($row['category']) . '] '; ?>
+          <?php echo escape($row['title']); ?>
+          </div>
           <div class="post__actions">
             <a class="post__action" href="index.php">首頁</a>
             <?php showEditBtn($row['id']) ?>
@@ -36,4 +35,4 @@ $row = $result->fetch_assoc();
     </div>
   </div>
 
-  <?php include_once('inc/footer.php')?>
+<?php include_once('inc/footer.php')?>

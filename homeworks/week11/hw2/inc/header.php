@@ -3,10 +3,12 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>部落格 v1.0</title>
+  <title>部落格 v1.1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="normalize.css" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="inc/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="inc/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -14,7 +16,7 @@
   <div class="navbar-mobile">
     <div class="container">
         <li><a href="articles.php">文章列表</a></li>
-        <li><a href="#">文章分類</a></li>
+        <li><a href="categories.php">文章分類</a></li>
         <li><a href="#">關於我</a></li>
     </div>
   </div>
@@ -26,11 +28,11 @@
       <ul class="navbar__list">
         <div>
           <li><a href="articles.php">文章列表</a></li>
-          <li><a href="#">文章分類</a></li>
+          <li><a href="categories.php">文章分類</a></li>
           <li><a href="#">關於我</a></li>
         </div>
         <div>
-          <li> <?php showAdmin() ?> </li>
+          <?php showAdmin() ?>
           <li> <?php showLoginOrLogout() ?> </li>
         </div>
       </ul>

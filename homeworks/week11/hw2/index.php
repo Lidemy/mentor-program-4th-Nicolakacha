@@ -9,6 +9,7 @@ if (!empty($_GET['page'])) {
 }
 $items_per_page = 5;
 $offset = ($page - 1) * $items_per_page;
+// get top articles
 $result = getTopArticles($items_per_page, $offset);
 ?>
 
@@ -16,8 +17,10 @@ $result = getTopArticles($items_per_page, $offset);
 
   <div class="container-wrapper">
     <div class="posts">
+      <!-- show articles -->
       <?php while($row = $result->fetch_assoc()) { ?>
         <article class="post">
+          <div class="post_category"><?php echo '['. escape($row['category']) . ']'?></div>
           <div class="post__header">
             <div><?php echo escape($row['title'])?></div>
             <div class="post__actions"><?php showEditBtn($row['id']) ?></div>
@@ -30,6 +33,7 @@ $result = getTopArticles($items_per_page, $offset);
     </div>
   </div>
 
+  <!-- show paginator -->
   <div class="page">
       <?php $countPages = countPages($items_per_page); ?>
       <div class="page__info">
