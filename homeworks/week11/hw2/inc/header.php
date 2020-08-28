@@ -17,7 +17,7 @@
     <div class="container">
         <li><a href="articles.php">文章列表</a></li>
         <li><a href="categories.php">文章分類</a></li>
-        <li><a href="#">關於我</a></li>
+        <li><a href="about.php">關於我</a></li>
     </div>
   </div>
   <nav class="navbar">
@@ -29,7 +29,7 @@
         <div>
           <li><a href="articles.php">文章列表</a></li>
           <li><a href="categories.php">文章分類</a></li>
-          <li><a href="#">關於我</a></li>
+          <li><a href="about.php">關於我</a></li>
         </div>
         <div>
           <?php showAdmin() ?>
