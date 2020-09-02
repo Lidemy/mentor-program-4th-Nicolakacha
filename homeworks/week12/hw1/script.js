@@ -73,10 +73,19 @@ $(document).ready(() => {
   // add new comments
   $('.add-comment-form').submit((e) => {
     e.preventDefault();
+    const nickname = $('input[name=nickname]').val().trim();
+    const content = $('textarea[name=content]').val().trim();
+    if (nickname === '' || content === '') {
+      console.log('not completed');
+      $('.alert').remove();
+      const remindMsg = '<div class="alert alert-danger mt-5" role="alert">Please complete both nickname and content!</div>';
+      $('.main').prepend(remindMsg);
+      return;
+    }
     const newComment = {
       site_key: 'nicolas',
-      nickname: $('input[name=nickname]').val(),
-      content: $('textarea[name=content]').val(),
+      nickname,
+      content,
     };
     $.ajax({
       type: 'POST',
@@ -88,6 +97,7 @@ $(document).ready(() => {
         newComment.created_at = data.created_at;
         appendCommentToDOM(commentsDOM, newComment, true);
         $('.form-control').val('');
+        $('.alert').remove();
       })
       .fail(err => console.log(err));
   });
