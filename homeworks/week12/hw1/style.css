@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
+
+
+* {
+  font-family: 'Ubuntu';
+}
+
+.card .content {
+  margin-bottom: 0;
+}
+
+.card .time {
+  color: rgb(112, 112, 112);
+}
+
+.card-top {
+  justify-content: space-between;
+}
