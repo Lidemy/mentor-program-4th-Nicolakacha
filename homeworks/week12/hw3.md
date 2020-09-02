@@ -8,7 +8,7 @@
 - 後端變成了一個單純的 API，可以給不同的前端做調用。
  
 ### 缺點
-- 檢視 SPA 頁面的原始碼，會發現沒有畫面上看到的實際內容，這是因為畫面的渲染是由 JavaScript 動態產生的，這樣會使網站的 SEO 表現很差，解法是可以讓第一次的畫面交給後端來產生(Server Side Rendering)，其他畫面才透過 JavaScript 產生(client side rendering)。
+- 檢視 SPA 頁面的原始碼，會發現沒有畫面上看到的內容的程式碼，這是因為畫面的渲染是由 JavaScript 動態產生的，這樣會使網站的 SEO 表現很差，解法是可以讓第一次的畫面交給後端來產生(Server Side Rendering)，其他畫面才透過 JavaScript 產生(client side rendering)。
 - 前端要先下載大量 JavaScript 檔案，才能計算並渲染畫面，所以首次渲染的時間可能較慢。
 - 前端要自己做狀態的管理，沒做好狀態管理的情況，舉例來說，若在 SPA 的部落格中快速點擊兩篇文章，可能會發生點進去 A 文章卻出現 B 文章的情況。
  
