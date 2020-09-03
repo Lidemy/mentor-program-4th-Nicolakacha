@@ -4,7 +4,7 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 
-const APIUrl = 'http://mentor-program.co/mtr04group1/Nicolakacha/week12/board';
+const APIUrl = 'http://mentor-program.co/mtr04group1/Nicolakacha/week12/todo';
 const template = `
   <li class="className todo list-group-item d-flex justify-content-between align-items-center">
     <div class="todo-content">
