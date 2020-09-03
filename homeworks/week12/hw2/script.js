@@ -130,7 +130,6 @@ $(document).ready(() => {
     });
     const x = JSON.stringify(clientTodoList);
     const newTodos = { userID, todos: x };
-    console.log(newTodos);
     $.ajax({
       type: 'POST',
       url: `${APIUrl}/api_add_todos.php`,
@@ -142,12 +141,15 @@ $(document).ready(() => {
         $('.userID').text(
           '保存好囉，請記下您的 userID，在網址列後面加上 ?userID={您的userID} 即可訪問個人的 Todo List~',
         );
+        $('.understand').click(() => {
+          document.location.href = `${location.href}?userID=${userIDNumber}`;
+        });
       })
       .fail(err => console.log(err));
   });
 
   // read todo by userID
-  if (userID !== '') {
+  if (userID) {
     $.ajax({
       type: 'GET',
       url: `${APIUrl}/api_todos.php?userID=${userID}`,
