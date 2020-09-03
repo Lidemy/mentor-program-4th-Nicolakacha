@@ -1,8 +1,8 @@
 /* eslint-disable prefer-destructuring */
-/* eslint-disable no-alert */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
-const APIUrl = 'http://localhost:80/nicolas_php_projects/week12_hw2';
+
+const APIUrl = 'http://mentor-program.co/mtr04group1/Nicolakacha/week12/todo';
 const template = `
   <li class="ongoing todo list-group-item d-flex justify-content-between align-items-center">
     <div class="todo-content">
@@ -15,6 +15,13 @@ const template = `
       <button class="delete btn btn-danger">刪除</button>  
     </div>
   </li>`;
+
+const reminder = `
+  <div class="reminder alert alert-danger text-center" role="alert">
+    請輸入資料哦！
+  </div>`;
+
+// get the userID from query parameter
 function getUserID() {
   const currentUrl = location.href;
   let userID = '';
@@ -29,25 +36,30 @@ function getUserID() {
   return userID;
 }
 
+// enocde input to avoid xss attack
 function encodeHTML(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 }
 
 $(document).ready(() => {
   const userID = getUserID();
+  // add new todo
   $('.submit').click(() => {
     const value = encodeHTML($('.todo-input').val());
     const newTodo = template.replace(/xxxxx/gi, value);
     $('.todo-input').val('');
     if (value.trim() !== '') {
+      $('.reminder').remove();
       $('.todo-list').prepend(newTodo);
     } else {
-      alert('請輸入內容');
+      $('.main').prepend(reminder);
     }
   });
+  // delete todo
   $('.todo-list').on('click', '.delete.btn', (e) => {
     $(e.target).parent().parent().remove();
   });
+  // complete todo
   $('.todo-list').on('click', '.completed.btn', (e) => {
     $(e.target)
       .parent()
@@ -66,17 +78,21 @@ $(document).ready(() => {
       $(e.target).parent().find('.edit').show();
     }
   });
+  // filter to do
   $('.main').on('click', '.all', () => {
     $('.todo').addClass('d-flex').show();
   });
+  // filter to do
   $('.main').on('click', '.filter-ongoing', () => {
     $('.todo.completed').removeClass('d-flex').hide();
     $('.todo.ongoing').addClass('d-flex').show();
   });
+  // filter to do
   $('.main').on('click', '.filter-completed', () => {
     $('.todo.ongoing').removeClass('d-flex').hide();
     $('.todo.completed').addClass('d-flex').show();
   });
+  // edit to do
   $('.main').on('click', '.edit', (e) => {
     const originTodo = $(e.target).parent().parent().find('.content')
       .text();
@@ -87,6 +103,8 @@ $(document).ready(() => {
         .text(newTodo);
     });
   });
+
+  // Save todo to database
   $(document).on('click', '.save', () => {
     const todos = $('.todo-list').html();
     const newTodos = { userID, todos };
@@ -99,11 +117,13 @@ $(document).ready(() => {
         const userIDNumber = data.userID;
         $('.save-title').text(`您好，您的 userID 是 ${userIDNumber} `);
         $('.userID').text(
-          '您的資料已保存好囉，請記下您的 userID，下次登入時在網址列後面加上 ?userID={您的userID} 就可以找到儲存記錄了~',
+          '保存好囉，請記下您的 userID，在網址列後面加上 ?userID={您的userID} 即可訪問個人的 Todo List~',
         );
       })
       .fail(err => console.log(err));
   });
+
+  // read todo by userID
   if (userID !== '') {
     $.ajax({
       type: 'GET',
