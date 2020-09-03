@@ -1,9 +1,10 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
 
-const APIUrl = 'http://mentor-program.co/mtr04group1/Nicolakacha/week12/todo';
+const APIUrl = 'http://mentor-program.co/mtr04group1/Nicolakacha/week12/board';
 const template = `
   <li class="className todo list-group-item d-flex justify-content-between align-items-center">
     <div class="todo-content">
@@ -25,16 +26,15 @@ const reminder = `
 // get the userID from query parameter
 function getUserID() {
   const currentUrl = location.href;
-  let userID = '';
   if (currentUrl.indexOf('?') !== -1) {
     const arr = currentUrl.split('?')[1].split('&');
     for (let i = 0; i <= arr.length - 1; i += 1) {
       if (arr[i].split('=')[0] === 'userID') {
-        userID = arr[i].split('=')[1];
+        const userID = arr[i].split('=')[1];
+        return userID;
       }
     }
   }
-  return userID;
 }
 
 // enocde input to avoid xss attack
@@ -44,7 +44,6 @@ function encodeHTML(s) {
 
 $(document).ready(() => {
   const userID = getUserID();
-
   // add new todo
   $('.submit').click(() => {
     const value = encodeHTML($('.todo-input').val());
@@ -131,6 +130,7 @@ $(document).ready(() => {
     });
     const x = JSON.stringify(clientTodoList);
     const newTodos = { userID, todos: x };
+    console.log(newTodos);
     $.ajax({
       type: 'POST',
       url: `${APIUrl}/api_add_todos.php`,
