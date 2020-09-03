@@ -27,7 +27,7 @@
     $userID = $_POST['userID'];
     $sql = "UPDATE nicolakacha_todos SET todos = ? WHERE userID = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('si', $todos, $userID);
+    $stmt->bind_param('ss', $todos, $userID);
     $result = $stmt->execute();
     $result ? $json = [
       'ok' => true, 
