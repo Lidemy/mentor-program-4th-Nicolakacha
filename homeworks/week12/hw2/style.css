@@ -1,0 +1,45 @@
+.list-group-flush>.list-group-item:last-child {
+  border-bottom-width: 1px;
+}
+.todo:hover {
+  filter: brightness(110%);
+}
+.todo .functional-btn {
+  visibility: hidden;
+}
+.todo:hover .functional-btn {
+  visibility: visible;
+}
+.todo .functional-btn button{
+  margin: 0 2px;
+}
+.completed-item {
+  text-decoration: line-through;
+  color: rgb(165, 165, 165);
+}
+.filter button{
+  margin-right: 10px;
+}
+@media screen and (max-width: 800px) {
+  .todo {
+    flex-direction: column;
+  }  
+  .todo .functional-btn {
+    visibility: visible;
+    margin-top: 10px;
+    visibility: visible;
+    align-self: center;
+  }
+  .todo .todo-content {
+    align-self: center;
+    word-break: break-all;
+  }
+  .filter {
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .filter button {
+    width: 32%;
+    margin: 0;
+  }
+}
