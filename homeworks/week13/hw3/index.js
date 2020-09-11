@@ -17,38 +17,9 @@ const template = `
       </div>
     </a>
   `;
-function getTopGames(cb) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', `${APIUrl}/games/top?limit=5`, true);
-  xhr.setRequestHeader('Accept', accept);
-  xhr.setRequestHeader('Client-ID', clientId);
-  xhr.onload = () => {
-    if (xhr.status >= 200 && xhr.status < 400) {
-      cb(JSON.parse(xhr.response));
-    }
-  };
-  xhr.onerror = () => {
-    console.log('error');
-  };
-  xhr.send();
-}
-function getStreams(game, cb) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', `${APIUrl}/streams?game=${encodeURIComponent(game)}&limit=20`, true);
-  xhr.setRequestHeader('Accept', accept);
-  xhr.setRequestHeader('Client-ID', clientId);
-  xhr.onload = () => {
-    if (xhr.status >= 200 && xhr.status < 400) {
-      cb(JSON.parse(xhr.response));
-    }
-  };
-  xhr.onerror = () => {
-    console.log('error');
-  };
-  xhr.send();
-}
+
 function renderStreams(streams) {
-  streams.forEach((stream) => {
+  streams.streams.forEach((stream) => {
     const {
       game,
       preview: { large },
@@ -68,24 +39,56 @@ function renderStreams(streams) {
     document.querySelector('.intro h1').innerHTML = game;
   });
 }
-function changeGame(game) {
-  document.querySelector('.streams').innerHTML = '';
-  getStreams(game.innerHTML, (data) => {
-    renderStreams(data.streams);
-  });
+
+function getStreams(game) {
+  return fetch(`${APIUrl}/streams?game=${encodeURIComponent(game)}&limit=20`, {
+    method: 'GET',
+    headers: new Headers({
+      Accept: accept,
+      'Client-ID': clientId,
+    }),
+  })
+    .then(res => res.json())
+    .catch(err => console.log(err));
 }
+
+function renderGames(games) {
+  games.top.forEach((top) => {
+    const li = document.createElement('li');
+    li.innerHTML = top.game.name;
+    document.querySelector('.games').appendChild(li);
+  });
+  return games.top[0].game.name;
+}
+
+function getGames() {
+  return fetch(`${APIUrl}/games/top?limit=5`, {
+    method: 'GET',
+    headers: new Headers({
+      Accept: accept,
+      'Client-ID': clientId,
+    }),
+  })
+    .then(res => res.json())
+    .catch(err => console.log(err));
+}
+
+async function init() {
+  const gameList = await getGames();
+  const game = renderGames(gameList);
+  const streams = await getStreams(game);
+  renderStreams(streams);
+}
+
+async function change(game) {
+  document.querySelector('.streams').innerHTML = '';
+  const streams = await getStreams(game.innerHTML);
+  renderStreams(streams);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  getTopGames((games) => {
-    games.top.forEach((top) => {
-      const li = document.createElement('li');
-      li.innerHTML = top.game.name;
-      document.querySelector('.games').appendChild(li);
-    });
-    getStreams(games.top[0].game.name, (data) => {
-      renderStreams(data.streams);
-    });
-    document.querySelector('.games').addEventListener('click', (e) => {
-      changeGame(e.target);
-    });
+  init();
+  document.querySelector('.games').addEventListener('click', (e) => {
+    change(e.target);
   });
 });
