@@ -1,0 +1,273 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "Microsoft JhengHei";
+}
+
+.nav {
+  display: flex;
+  position: fixed;
+  padding: 0 40px 0 10px;
+  width: 100%;
+  height: 70px;
+  top: 0;
+  align-items: center;
+  box-shadow: 0px 2px 2px 0 rgb(15, 15, 15);
+  z-index: 2;
+  background-color: #18181b;
+  overflow: hidden;
+}
+
+.nav .site {
+  margin: 0 auto 0 20px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: white;
+}
+.nav .site:hover {
+  color: #9147ff;
+  animation: move 1s;
+}
+
+@keyframes move {
+  0% {
+    letter-spacing: 0.5px;
+  }
+  20% {
+    letter-spacing: 1px;
+  }
+  40% {
+    letter-spacing: 0.5px;
+  }
+  60% {
+    letter-spacing: 1px;
+  }
+  100% {
+    letter-spacing: 0px;
+  }
+}
+
+.nav ul {
+  display: flex;
+  justify-content: flex-end;
+}
+.nav li {
+  display: flex;
+  padding: 20px;
+  cursor: pointer;
+  align-items: center;
+  font-size: 0.9rem;
+  color: white;
+  transition: all 0.2s linear;
+}
+
+.nav li:hover {
+  color: #9147ff;
+  animation: shake 0.6s;
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(3deg);
+  }
+  50% {
+    transform: rotate(-2deg);
+  }
+}
+
+.main {
+  background-image: linear-gradient(135deg, #000000, #353535);
+  padding-bottom: 20px;
+  min-height: 100vh;
+}
+.container {
+  max-width: 1440px;
+  margin: 5px auto 10px;
+  padding: 3%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.intro {
+  margin: 50px 0 20px;
+  text-align: center;
+  line-height: 3rem;
+  color: white;
+}
+
+.intro h1 {
+  text-transform: uppercase;
+}
+
+.neon-effect {
+  color: rgb(186, 170, 255);
+  letter-spacing: 2px;
+  text-shadow: 
+    0 0 5px rgba(145, 71, 255, 0.1),
+    0 0 10px rgba(145, 71, 255, 1),
+    0 0 20px rgba(145, 71, 255, 1),
+    0 0 40px rgba(145, 71, 255, 1);
+  animation: neon-shine 2.5s 1s linear infinite;
+}
+
+@keyframes neon-shine {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    color: #232323;
+  }
+}
+
+.streams {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-gap: 30px;
+  text-align: center;
+}
+
+.stream {
+  position: relative;
+  margin: 5px 0;
+  background-color: rgb(51, 51, 51);
+  transition: all 0.2s linear;
+  filter: brightness(0.8);
+  cursor: pointer;
+}
+
+.stream:hover {
+  transform: translateY(-2%);
+  filter: brightness(1.1);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.stream a {
+  text-decoration: none;
+}
+
+.stream .info {
+  display: flex;
+  margin-top: 3px;
+  padding: 10px;
+}
+
+.stream .preview img {
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.stream .photo {
+  border-radius: 30px;
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  overflow: hidden;
+}
+
+.stream .photo img {
+  width: 100%;
+  height: 100%;
+}
+
+.stream .txt {
+  width: 90%;
+  margin-left: 10px;
+  padding: 5px 0px;
+  font-weight: 400;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: white;
+}
+
+.stream:hover .txt {
+  color: rgb(145, 71, 255);
+}
+
+
+.stream .txt .title {
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.footer {
+  display: flex;
+  padding: 5px 20px;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  color: white;
+  background-color: black;
+  line-height: 40px;
+}
+
+.footer p {
+  margin-right: auto;
+  padding-left: 10px;
+}
+
+.footer .social-media a {
+  padding: 0 10px;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.footer .social-media a:hover {
+  color: #9147ff;
+}
+
+.go-top {
+  width: 5vh;
+  height: 5vh;
+  line-height: 5vh;
+  background-color: rgb(221, 221, 221);
+  position: fixed;
+  bottom: 65px;
+  right: 50px;
+  text-align: center;
+  font-size: 1.5rem;
+  opacity: 0.2;
+}
+
+
+.go-top:hover {
+  color: rgb(145, 71, 255);
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 0;
+    flex-direction: column;
+    height: auto;
+  }
+  .nav .site {
+    margin: 0;
+    padding-top: 10px;
+  }
+  .nav ul {
+    margin-top: 10px;
+  }
+  .nav li {
+    padding: 10px 10px;
+    font-size: .6rem;
+    text-align: center;
+  }
+  .container {
+    margin-top: 8vh;
+    padding-top: 1vh;
+  }
+}
