@@ -1,0 +1,47 @@
+<%
+const formatDate = function (date) {
+  const arr = date.toString().match(/(.*)\ (.*)\ (.*)\ (.*)\ (.*)\ (.*)\ (.*)\ (.*)\ (.*)/);
+  const getDate = [arr[4], arr[2], arr[3], arr[5]];
+  return transDate = getDate.join(' ');
+}
+%> 
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <%- include ('templates/head') %> 
+</head>
+
+<body>
+  
+  <%- include ('templates/nav') %>
+
+  <div class="container-wrapper">
+    <div class="posts">
+      <article class="post">
+        <div class="post__header">
+          <div>
+            <%= `[${article.Category.category}] ${article.title}` %> 
+          </div>
+          <div class="post__actions">
+            <a class="post__action" href="/">首頁</a>
+            <% if (username) { %>
+            <a class='post__action' href="/article/manage/<%= article.id %>">編輯</a>
+            <% } %>            
+          </div>
+        </div>
+        <div class="post__info">
+          <%= formatDate(article.createdAt) %>
+        </div>
+        <div class="post__content">
+          <%= article.content %> 
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <%- include ('templates/footer') %>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <%- include ('templates/head') %> 
+</head>
+
+<body>
+  
+  <%- include ('templates/nav') %>
+
+  <div class="categories container-wrapper list">
+    <div class="add-categories">
+      <form action="/category/new" method="POST">
+        新增分類：
+        <input type="text" placeholder="分類名稱" name="category">
+        <input style="display:none"/>
+        <button type="submit">新增</button>
+      </form>
+    </div>
+
+    
+    <% if (errorMessage[0]) { %>
+      <div class="remind-category">
+        <%= errorMessage %>
+      </div>
+    <% } %>
+
+    <div class="list-categories">
+      <% categories.forEach(category => { %>
+        <div class="list-category">
+          <div class="list-category__title">
+            <h3><i class="fa fa-bookmark-o" aria-hidden="true"></i><%= category.category %></h3>
+          </div>
+          <div class="list-post__info">
+            <form action="/category/manage/<%= category.id %>" method="POST">
+              <input type="text" placeholder="更改分類名稱" name="category">
+              <input style="display:none"/>
+              <button type="submit" class="list-post__btn">修改</button>
+            </form>
+            <form action="/category/delete/<%= category.id %>" method="POST">
+              <button type="submit" class="list-post__btn">刪除</button>
+            </form>
+          </div>
+        </div>
+      <% }) %>  
+    </div>
+
+  </div>
+
+<%- include ('templates/footer') %>
+
+</body>
+</html>

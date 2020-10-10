@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <%- include ('templates/head') %> 
+</head>
+
+<body>
+  
+  <%- include ('templates/nav') %>
+
+  <div class="container-wrapper edit_article">
+    <div class="container">
+      <div class="edit-post">
+
+        <form action="/article/<%= article.id %>" method="POST">
+
+         
+        <% if (errorMessage[0]) { %>
+          <h3 class="remind">
+            <%= errorMessage %>
+          </h3>
+        <% } %>
+        
+
+          <div class="title">
+            <div class="edit-post__title">
+              發表文章：
+            </div>
+            <div class="edit-post__input-wrapper">
+              <input type="text" name="title" class="edit-post__input" placeholder="請輸入文章標題" value="<%= article.title %>"/>
+            </div>
+          </div>
+
+          <div class="edit-post__input-wrapper">
+            文章分類：
+            <select name="CategoryId">
+                <% categories.forEach(category => { %>
+                  <%
+                    let selected= '';
+                    if (category.id == article.CategoryId) {
+                      selected =" SELECTED";
+                    }
+                  %>
+                  <option value="<%= category.id %>" <%= selected %>><%= category.category %></option> 
+                <% }) %>
+            </select>
+          </div>
+
+          <div class="edit-post__input-wrapper">
+            <textarea name="content" rows="20" class="edit-post__content"><%= article.content %></textarea>
+          </div>
+
+          <div class="edit-post__btn-wrapper">
+            <button type="submit" class="edit-post__btn">送出</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+    
+  <%- include ('templates/footer') %>
+
+</body>
+</html>

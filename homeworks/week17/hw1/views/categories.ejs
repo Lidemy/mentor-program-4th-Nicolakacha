@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <%- include ('templates/head') %> 
+</head>
+
+<body>
+  
+  <%- include ('templates/nav') %>
+
+  <div class="categories container-wrapper list">
+      
+    <h2>文章分類</h2>
+
+    <div class="list-categories">
+      <% categories.forEach(category => { %>
+        <div class="list-category">
+          <div class="list-category__title">
+            <a href="/category/<%= category.id %> ">
+              <h3><i class="fa fa-bookmark-o" aria-hidden="true"></i><%= category.category %></h3>
+            </a>
+          </div>
+        </div>
+      <% }) %>  
+    </div>
+
+  </div>
+
+<%- include ('templates/footer') %>
+
+</body>
+</html>

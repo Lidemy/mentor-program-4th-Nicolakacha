@@ -1,0 +1,53 @@
+<%
+const subContent = function(str, n) {
+  const r = /[^\x00-\xff]/g;
+  if (str.replace(r, "mm").length <=n) {
+    return str;
+  }
+  const m = Math.floor(n/2);
+  for (let i = m; i < str.length; i += 1) {
+    if(str.substr(0, i).replace(r, "mm").length >= n) {
+       return `${str.substr(0, i)} ...`;
+    }
+  }
+  return str;
+}
+
+const formatDate = function (date) {
+  const arr = date.toString().match(/(.*)\ (.*)\ (.*)\ (.*)\ (.*)\ (.*)\ (.*)\ (.*)\ (.*)/);
+  const getDate = [arr[4], arr[2], arr[3], arr[5]];
+  return transDate = getDate.join(' ');
+}
+%> 
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <%- include ('templates/head') %> 
+</head>
+
+<body>
+  
+  <%- include ('templates/nav') %>
+
+  <div class="container-wrapper">
+      <div class="posts">
+        <% articles.forEach(article => { %>
+          <article class="post">
+            <div class="post_category"><%= article.Category.category %></div>
+            <div class="post__header">
+              <div><%= article.title %></div>
+            </div>
+            <div class="post__info"><%= formatDate(article.createdAt) %></div>
+            <div class="post__content"><%= subContent(article.content, 150) %></div>
+            <a class="btn-read-more" href="/article/<%= article.id %> ">READ MORE</a>
+          </article>
+        <% }) %>
+      </div>
+  </div>
+
+  <%- include ('templates/footer') %>
+
+</body>
+</html>
