@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('templates/head_manage') %>
+  </head>
+
+  <body>
+    <%- include ('templates/nav_manage') %>
+    <div class="prize__manage">
+      <h1>抽獎管理</h1>
+      <div class="prize__add">
+        <a href="/manage_prize/add">新增獎項</a>
+      </div>
+      <p class="explain">權重數不可重複，中獎率 = (本獎權重數 - 1 - 上一個權重數 ) / 總權重數</p>
+      <div class="prize__list">
+        <% prizes.forEach(prize => { %>
+          <div class="item">
+            <div class="name">
+              <h3><%= `[${prize.title}] ${prize.content}` %></h3>
+            </div>
+            <div class="picture">
+              <p>圖片網址：<a target="blank" href="<%= prize.url %>"><%= prize.url %></a></p>
+            </div>
+            <div class="rate">
+              <p>機率（數字越大機率越小）：<%= prize.weight %></p>
+            </div>
+            <div class="info">
+              <div class="edit">
+                <a href="/manage_prize/edit/<%= prize.id %>">編輯</a>
+              </div>
+              <div class="delete">
+                <form action="/manage_prize/delete"  method="POST">
+                  <input name="id" hidden value="<%= prize.id %>" />
+                  <button type="submit">刪除</button>
+                </form>
+              </div>
+            </div>
+          </div>         
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>
