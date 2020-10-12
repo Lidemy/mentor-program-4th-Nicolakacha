@@ -82,6 +82,10 @@ const prizeController = {
     const {
       title, content, url, weight,
     } = req.body;
+    if (weight <= 0) {
+      req.flash('errorMessage', '權重數要是正整數啦');
+      return res.redirect('/manage_prize/add');
+    }
     if (title !== '' && content !== '' && url !== '' && weight !== '') {
       Prize.create({
         title, content, url, weight,
@@ -119,6 +123,10 @@ const prizeController = {
     const {
       title, content, url, weight,
     } = req.body;
+    if (weight <= 0) {
+      req.flash('errorMessage', '權重數要是正整數啦');
+      return res.redirect(`/manage_prize/edit/${req.params.id}`);
+    }
     if (title !== '' && content !== '' && url !== '' && weight !== '') {
       Prize.findByPk(req.params.id)
         .then((prize) => {
@@ -150,7 +158,11 @@ const prizeController = {
 
   delete: (req, res, next) => {
     checkLogin(req.session.username, res);
-    Prize.findByPk(req.params.id)
+    Prize.findOne({
+      where: {
+        id: req.body.id,
+      },
+    })
       .then((prize) => {
         console.log('delete successfully');
         prize.destroy();
