@@ -34,7 +34,9 @@ const prizeController = {
   },
 
   getPrize: (req, res) => {
-    Prize.findAll().then((prizes) => {
+    Prize.findAll({
+      order: [['weight']],
+    }).then((prizes) => {
       const weightArr = [];
       for (const prize of prizes) {
         weightArr.push(prize.weight);
@@ -44,11 +46,15 @@ const prizeController = {
       let result = {};
       console.log(weightSum);
       console.log(random);
+      console.log(weightArr);
       if (random > weightArr[weightArr.length - 1]) {
         result = {
           title: '唔，沒有中獎呢',
           content: '再加油哦',
           url: '../images/games-bn.jpg',
+          random,
+          weightSum,
+          weightArr,
         };
         return res.status(200).json(result);
       }
@@ -65,6 +71,9 @@ const prizeController = {
             title: prizeYouGet.title,
             content: prizeYouGet.content,
             url: prizeYouGet.url,
+            random,
+            weightSum,
+            weightArr,
           };
           return res.status(200).json(result);
         })
