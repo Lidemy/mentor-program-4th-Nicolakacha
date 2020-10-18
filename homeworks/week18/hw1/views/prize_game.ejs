@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <%- include ('templates/head') %>
+    <script type="text/javascript" src="/js/prize.js"></script>
+  </head>
+
+  <body>
+    <%- include ('templates/nav') %>
+    
+    <section class="games">
+      
+      <div class="container game">
+        <h2>2020 夏日輕盈特賞！ 抽獎活動辦法</h2>
+        <div class="part">
+          <h3>活動期間：</h3>
+          <div>2020/11/01~2020/11/30</div>
+        </div>
+        <hr />
+
+        <div class="part">
+          <h3>活動說明：</h3>
+          <div>
+            今天老闆佛心來著決定給大家發獎勵，有看有機會，沒看只能幫QQ！只要在店內消費滿1000000元即有機會獲得頭獎日本東京來回雙人遊！
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="part">
+          <h3>獎&emsp;&emsp;品：</h3>
+          <div>
+            <% prizes.forEach(prize => { %>
+            <p>❤ <%= `${prize.title}：${prize.content}` %></p>
+            <% }) %>
+          </div>
+        </div>
+
+        <hr />
+        <button class="play__game" onclick="this.disabled=true">
+          我要抽獎
+        </button>
+      </div>
+      
+      <div class="container prize__game hide">
+        <h2 class="name"></h2>
+        <p class="content"></p>
+        <button class="reload">再抽一次</button>
+      </div>
+    
+    </section>
+
+    <%- include ('templates/footer') %>
+  
+  </body>
+</html>

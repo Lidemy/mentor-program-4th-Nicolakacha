@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <%- include ('templates/head') %>
+  </head>
+
+  <body>
+    <%- include ('templates/nav_manage') %>
+
+    <div class="manage">
+      <h1>管理後台</h1>
+      
+      <p class="explain">喵，歡迎主人殿下來到管理後台，請主人管理管理我吧</p>
+      
+      <div class="manage__board">
+        
+        <a class="manage__item" href="/manage/menu">
+          <i class="fa fa-cutlery" aria-hidden="true"></i>
+          <h3>菜單管理</h3>
+        </a>
+        
+        <a class="manage__item" href="/manage/question">
+          <i class="fa fa-question" aria-hidden="true"></i>
+          <h3>問題管理</h3>
+        </a>
+        
+        <a class="manage__item" href="/manage/prize">
+          <i class="fa fa-trophy" aria-hidden="true"></i>
+          <h3>抽獎管理</h3>
+        </a>
+        
+        <a class="manage__item" href="/manage/order">
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+          <h3>訂單管理</h3>
+        </a>
+      
+      </div>
+    </div>
+  </body>
+</html>

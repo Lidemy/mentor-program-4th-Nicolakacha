@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <%- include ('templates/head') %>
+  </head>
+
+  <body>
+    <%- include ('templates/nav_manage') %>
+
+    <div class="manage">
+
+      <h1>常見問題管理</h1>
+
+      <div class="manage__title ">
+        <a href="/manage/question/add">新增問題</a>
+      </div>
+
+      <p class="manage__explain">順序按 1 ~ 99 排列</p>
+      
+      <div class="manage__list question">
+        
+        <% questions.forEach(question => { %>
+          <div class="item">
+            
+            <div class="order">
+              <p>[順序]：<%= question.order %></p>
+            </div>
+            
+            <div class="title">
+              <p>[問題]：<%= question.question %></p>
+            </div>
+            
+            <div class="answer">
+              <p>[回答]：<%= question.answer %></p>
+            </div>
+            
+            <div class="function">
+              
+              <div class="edit">
+                <a href="/manage/question/edit/<%= question.id %>">編輯</a>
+              </div>
+              
+              <div class="delete">
+                <form action="/manage/question/delete" method="POST">
+                  <input name="id" hidden value="<%= question.id %>" />
+                  <button type="submit">刪除</button>
+                </form>
+              </div>
+            
+            </div>
+          
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>

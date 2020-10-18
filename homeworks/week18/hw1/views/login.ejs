@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <%- include ('templates/head') %>
+  </head>
+
+  <body>
+    <%- include ('templates/nav') %>
+
+    <div class="user">
+      <h2>請登入管理系統</h2>
+      <form class="user__form" action="/login" method="POST">
+        <div class="user__item">
+          <h3 class="input__label">USERNAME</h3>
+          <input class="input__field" type="text" name="username" />
+        </div>
+        
+        <div class="user__item">
+          <h3 class="input__label">PASSWORD</h3>
+          <input class="input__field" type="password" name="password" />
+        </div>
+  
+        <h3 class="remind">
+          <% if (errorMessage[0]) { %>
+              <%= errorMessage %>
+          <% } %>
+        </h3>
+  
+        <input type='submit' value="登入" />
+      </form>
+       
+    </div>
+
+  </body>
+</html>

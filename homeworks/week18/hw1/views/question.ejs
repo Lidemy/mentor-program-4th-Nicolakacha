@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <%- include ('templates/head') %>
+    <script type="text/javascript" src="/js/question.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+  </head>
+
+  <body>
+    <%- include ('templates/nav') %>
+
+    <section class="questions">
+      <div class="section">
+        <h2 class="section__title">FAQ - 常見問題</h2>
+
+        <% let i = 1 %> 
+        <% questions.forEach(question => { %>
+          <div class="group">
+            <div class="question">
+              <div>Q<%= i %>:&nbsp</div>
+              <div class="question__text"><%= question.question %></div>
+            </div>
+
+            <div class="answer hide"><%= question.answer %></div>
+          </div>
+          <% i++ %>
+        <% }) %>
+      </div>
+    </section>
+
+    <%- include ('templates/cart') %>
+
+    <%- include ('templates/footer') %>
+  </body>
+</html>
