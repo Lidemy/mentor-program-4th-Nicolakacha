@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ('templates/head_manage') %>
+  </head>
+
+  <body>
+    <%- include ('templates/nav_manage') %>
+    <div class="prize__manage">
+      <h1>新增獎項</h1>
+
+      <form method="POST" class="prize__edit" action="/manage_prize/add">
+        <div class="title">
+          <h3>獎項</h3>
+          <input type="text" name="title" maxlength="20" />
+        </div>
+        <div class="content">
+          <h3>內容</h3>
+          <input type="text" name="content" maxlength="50" />
+        </div>
+        <div class="url">
+          <h3>Imgur 圖片網址</h3>
+          <input type="text" name="url" />
+        </div>
+        <div class="weight">
+          <h3>權重數</h3>
+          <p>權重數不可重複，中獎率 = (本獎權重數 - 1 - 上一個權重數 ) / 總權重數</p>
+          <input type="number" name="weight" maxlength="10" />
+        </div>
+
+        <div class="remind">
+          <% if (errorMessage[0]) { %> <%= errorMessage %> <% } %>
+        </div>
+
+        <div class="post__btn">
+          <button type="submit" class="edit-post__btn">送出</button>
+        </div>
+      </form>
+      
+
+    </div>
+  </body>
+</html>

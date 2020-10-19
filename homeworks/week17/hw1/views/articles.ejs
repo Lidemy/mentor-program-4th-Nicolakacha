@@ -1,0 +1,38 @@
+<%
+const formatDate = function (date) {
+  const arr = date.toString().match(/(.*)\ (.*)\ (.*)\ (.*)\ (.*)\ (.*)\ (.*)\ (.*)\ (.*)/);
+  const getDate = [arr[4], arr[2], arr[3], arr[5]];
+  return transDate = getDate.join(' ');
+}
+%> 
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <%- include ('templates/head') %> 
+</head>
+
+<body>
+  
+  <%- include ('templates/nav') %>
+
+  <div class="container-wrapper list">
+    <div class="list-posts">
+      <% articles.forEach(article => { %>
+        <div class="list-post">
+          <div class="list-post__title">
+              <a href="article/<%= article.id %>"><%= `[${article.Category.category}] ${article.title}` %></a>
+          </div>
+          <div class="list-post__info">
+            <div class="list-post__created-at"><%= formatDate(article.createdAt) %></div>
+          </div>
+        </div>
+        <% }) %>
+    </div>
+  </div>
+
+  <%- include ('templates/footer') %>
+
+</body>
+</html>

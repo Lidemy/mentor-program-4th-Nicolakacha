@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <%- include ('templates/head') %> 
+</head>
+
+<body>
+
+  <%- include ('templates/nav') %>
+
+  <div class="login-wrapper">
+
+    <h2>Get a new account</h2>
+
+    <form action="/register" method="POST">
+      <div class="input__wrapper">
+        <div class="input__label">USERNAME</div>
+        <input class="input__field" type="text" name="username" />
+      </div>
+      
+      <div class="input__wrapper login">
+        <div class="input__label">PASSWORD</div>
+        <input class="input__field" type="password" name="password" />
+      </div>
+
+      <div class="input__wrapper login">
+        <div class="input__label">PASSWORD AGAIN</div>
+        <input class="input__field" type="password" name="password2" />
+      </div>
+
+      <h3 class="remind">
+        <% if (errorMessage[0]) { %>
+            <%= errorMessage %>
+        <% } %>
+      </h3>
+
+      <input class='login-btn' type='submit' value="註冊" />
+    </form>
+     
+  </div>
+
+  <%- include ('templates/footer') %>
+
+</body>
+</html>
+
