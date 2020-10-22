@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <%- include ('templates/head') %>
+    <script type="text/javascript" src="/js/upload_picture.js"></script>
+  </head>
+
+  <body>
+    <%- include ('templates/nav_manage') %>
+    
+    <div class="manage">
+
+      <h1>更新獎項</h1>
+
+      <form method="POST" class="manage__edit" action="/manage/prize/edit/<%= prize.id %>">
+
+        <div class="image">
+          <div class="image__block">
+            <img id="image" src="<%= prize.url %>" alt="">
+          </div>
+          <input class="image__url" hidden type="text" name="url" value="<%= prize.url %>" readonly />
+          <input class="image__upload" type="file"/>
+        </div>
+        
+        <div class="title">
+          <h3>獎項</h3>
+          <input type="text" name="title" maxlength="20" value="<%= prize.title %>"/>
+        </div>
+        
+        <div class="content">
+          <h3>內容</h3>
+          <input type="text" name="content" maxlength="50" value="<%= prize.content %>"/>
+        </div>
+        
+        <div class="weight">
+          <h3>權重數</h3>
+          <p>中獎率：本獎權重數 ～ 上一個獎項的權重數的區間 / 最後一個權重數</p>
+          <input type="number" min="1" name="weight" maxlength="10" value="<%= prize.weight %>"/>
+        </div>
+
+        <div class="remind">
+          <% if (errorMessage[0]) { %> <%= errorMessage %> <% } %>
+        </div>
+
+        <div class="post__btn">
+          <button type="submit" class="edit-post__btn">送出</button>
+        </div>
+      
+      </form>
+
+    </div>
+  </body>
+</html>

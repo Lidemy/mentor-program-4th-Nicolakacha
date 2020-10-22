@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <%- include ('templates/head') %>
+  </head>
+
+  <body>
+    <%- include ('templates/nav_manage') %>
+    
+    <div class="manage">
+
+      <h1>菜單管理</h1>
+
+      <div class="manage__title">
+        <a href="/manage/menu/add">新增餐點</a>
+      </div>
+      
+      <div class="manage__list menu">
+        
+        <% menus.forEach(menu => { %>
+          <div class="item">
+            <div class="picture">
+              <img src="<%= menu.url %>" alt="圖片錯誤">
+            </div>
+            <div class="info">
+              <div class="name">
+                <p>餐點： <%= menu.title %></p>
+              </div>
+              
+              <div class="price">
+                <p>價格： <%= menu.price %> 元</p>
+              </div>
+
+              <div class="order">
+                <p>順序： <%= menu.order %></p>
+              </div>
+              
+              <div class="function">
+                <div class="edit">
+                  <a href="/manage/menu/edit/<%= menu.id %>">編輯</a>
+                </div>
+                <div class="delete">
+                  <form action="/manage/menu/delete"  method="POST">
+                    <input name="id" hidden value="<%= menu.id %>" />
+                    <button type="submit">刪除</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          
+          </div>         
+        <% }) %>
+      
+      </div>
+    </div>
+  </body>
+</html>

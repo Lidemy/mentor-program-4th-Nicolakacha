@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <%- include ('templates/head') %>
+    <script type="text/javascript" src="/js/index.js"></script>
+  </head>
+
+  <body>
+    <%- include ('templates/nav') %>
+
+    <section class="banner menu"></section>
+
+    <section class="ad menu">
+      <div class="section">
+        <h2 class="section__title">熱銷搶購中</h2>
+        <div class="section__images">
+          <div class="img">
+            <img src="/images/a-001.png" alt="好吃" />
+            <div class="remind">售完</div>
+          </div>
+          <div class="img">
+            <img src="/images/a-002.png" alt="好吃" />
+            <div class="remind">售完</div>
+          </div>
+          <div class="img">
+            <img src="/images/a-003.png" alt="好吃" />
+            <div class="remind">售完</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="copywriting menu">
+      <div class="section">
+        <div class="img">
+          <img src="/images/order-ad.png" alt="copywriting">
+        </div>
+        <div class="article">
+          <h3>
+在家也能輕鬆
+咬一口我們的鮮甜清爽
+          </h3>
+          <p>您再也不必受限於時間或地點，隨時隨地透過我們24小時的線上購物選購，咬一口廚房堅持以細選食材、輕盈口感，呈現食材本身的原滋原味</p>
+          <p>我們將咬一口的經典菜色研發製成相應當季的包裝食品及各式精美的伴手禮盒。將剛出爐的新鮮迅速送達家人手中，也適合與更多喜愛咬一口的</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cursor">
+      <a href="#products">
+        <h3>立即輕鬆採購</h3>
+        <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+      </a>
+    </div>
+
+    <section class="products" id="products">
+      <div class="section">
+        <% menus.forEach(product => { %>
+          <div class="product">
+            <div class="picture">
+              <img src="<%= product.url %>" alt="<%= product.title %>">
+            </div>
+            <div class="info">
+              <span class="id" hidden><%= product.id %></span>
+              <%= product.title %> | $ <%= product.price %>
+            </div>
+            <div class="add-cart">
+              <button type="submit" class="add-cart__btn">
+                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                  &nbsp;加入購物車
+              </button>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </section>
+
+    <div class="cursor">
+      <a href="#location">
+        <h3>還是想要親身體會我們的服務？</h3>
+        <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+      </a>
+    </div>
+
+    <section class="location menu" id="location">
+      <div class="section">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.002890183707!2d121.5623502150063!3d25.03397598397251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abb6da9c9e1f%3A0x1206bcf082fd10a6!2zMTEw5Y-w5YyX5biC5L-h576p5Y2A5L-h576p6Lev5LqU5q61N-iZnw!5e0!3m2!1szh-TW!2stw!4v1595575017522!5m2!1szh-TW!2stw" width="100%"" height="280" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">x</iframe>            
+      </div>
+    </section>
+
+    <%- include ('templates/cart') %>
+
+    <%- include ('templates/footer') %>
+  </body>
+</html>
