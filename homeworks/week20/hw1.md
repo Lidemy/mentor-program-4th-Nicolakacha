@@ -6,6 +6,10 @@
 
 接下來幾週的學習安排會跟之前很不一樣，同時跟課和進行 Final Project 需要更好的時間安排，之前每週大概需要 65 小時來學習和複習，接下來四週可能要壓縮到 45 小時 左右，把時間分配給 Final Project，課程進入最後階段也代表課程快結束了，有點捨不得啊嗚嗚。
 
+### 關於 Final Project
+
+Final Project 目前我們這組（Krebikshaw, Ruofan, Small-leaf 和我）已經做好初步的 User Flow、Desktop Wireframe、資料庫設計、API 文件，目前正在做 Mobile Wireframe，以及規劃每個頁面的路由及會串到哪些內部 API，但不知道方向和內容是不是在對的道路上，之後我們有比較完整的規格書完成之後，想請 Huli 和助教提供建議 QQ。
+
 ## 自我檢測
 
 ### Week16
