@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "Microsoft JhengHei";
+}
+
+body {
+  max-width: 1920px;
+  background: rgba(0, 0, 0, 0.2);
+  font-family: "MicrosoftJhengHei", serif;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -1.8px;
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 14px;
+  line-height: 2em;
+}
+
+input {
+  border: 0.5px solid #d0d0d0;
+  width: 287px;
+  font-size: 16px;
+}
+
+::placeholder {
+  color: gray;
+}
+
+button {
+  border-radius: 3px;
+  border: 0px transparent;
+  margin: 15px 0;
+  width: 92px;
+  height: 40px;
+  background-color: #fad312;
+  font-size: 15px;
+}
+
+button:hover {
+  background-color: rgba(250, 212, 20, 0.6);
+}
+
+button:focus {
+  outline: 0px transparent;
+}
+
+footer {
+  padding: 24px 12px;
+  background: black;
+  color: #999999;
+  font-size: 13px;
+  text-align: center;
+}
