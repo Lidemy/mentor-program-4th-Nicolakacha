@@ -55,7 +55,6 @@ const DangerButton = styled(TodoButton)`
 export default function todoItem({
   todo,
   deleteTodo,
-  editTodo,
   toggleIsDone,
 }) {
   const handleDeleteClick = () => deleteTodo(todo.id);
