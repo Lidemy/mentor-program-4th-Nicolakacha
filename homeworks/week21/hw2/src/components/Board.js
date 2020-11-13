@@ -46,9 +46,9 @@ export default function board({
 }) {
   return (
     <Board>
-        {rows.map((row, x) => (
+        {rows.map((_, x) => (
           <BoardRow key={x}>
-            {columns.map((square, y) => (
+            {columns.map((_, y) => (
               <BoardSquare
                 key={y}
                 onClick={handlePlayClick(x, y, currentPlayer)}
