@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from 'react';
 
 export default function useForm() {
   const [name, setName] = useState('');
@@ -7,7 +8,8 @@ export default function useForm() {
   const [type, setType] = useState('');
   const [source, setSource] = useState('');
   const [advice, setAdvice] = useState('');
-
+  const [isClicked, setIsClick] = useState(false);
+  
   const [hasName, setHasName] = useState();
   const [hasType, setHasType] = useState();
   const [hasSource, setHasSource] = useState();
@@ -35,6 +37,12 @@ export default function useForm() {
   const handleInputChange = (setValue) => (e) => {
     setValue(e.target.value);
   };
+
+  useEffect(() => {
+    if (isClicked === true) {
+      checkDataValidity();
+    }
+  }, [name, email, phone, type, source, advice]);
 
   const formDataObject = {
     name,
@@ -76,6 +84,7 @@ export default function useForm() {
   const handleSubmitForm = (e) => {
     e.preventDefault();
     checkDataValidity();
+    setIsClick(true);
     if (!hasError) {
       alert(JSON.stringify(formDataObject));
     }
