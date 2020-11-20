@@ -4,10 +4,10 @@ import { AuthContext, LoadingContext } from '../../contexts';
 import { getAuthToken } from '../../utils';
 import { getMe } from '../../WebAPI';
 import styled from 'styled-components';
-
 import Navbar from '../Navbar';
 import HomePage from '../../pages/HomePage';
 import LoginPage from '../../pages/LoginPage';
+import RegisterPage from '../../pages/RegisterPage';
 import PostsPage from '../../pages/PostsPage';
 import PostPage from '../../pages/PostPage';
 import NewPostPage from '../../pages/NewPostPage';
@@ -29,19 +29,15 @@ const Footer = styled.div`
 function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isGettingUser, setIsGettingUser] = useState(true);
   const HOMEPAGE_URL = '/react-blog';
 
   useEffect(() => {
-    if (getAuthToken() === '') {
-      setIsGettingUser(false);
-    } else {
+    if (getAuthToken()) {
       getMe().then((response) => {
         if (response.ok) {
           setUser(response.data);
-          setIsGettingUser(false);
         }
-      });
+      })
     }
   }, []);
 
@@ -49,10 +45,11 @@ function App() {
     <AuthContext.Provider value={{ user, setUser }}>
       <Root>
         <BrowserRouter>
-          {!isGettingUser && <Navbar />}
           <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
+            <Navbar/>
             <Routes>
               <Route path={HOMEPAGE_URL} element={<HomePage />} />
+              <Route path={`${HOMEPAGE_URL}/register`} element={<RegisterPage />} />
               <Route path={`${HOMEPAGE_URL}/login`} element={<LoginPage />} />
               <Route path={`${HOMEPAGE_URL}/posts`} element={<PostsPage />} />
               <Route path={`${HOMEPAGE_URL}/post/:id`} element={<PostPage />} />

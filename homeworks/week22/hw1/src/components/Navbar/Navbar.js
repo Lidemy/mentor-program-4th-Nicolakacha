@@ -35,6 +35,13 @@ const Nav = styled(NavLink)`
   height: 64px;
 `;
 
+const Logout = styled.a`
+  display: flex;
+  align-items: center;
+  margin: 0 30px;
+  height: 64px;
+`;
+
 export default function Navbar() {
   const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -42,18 +49,25 @@ export default function Navbar() {
     setAuthToken('');
     setUser(null);
     alert('登出成功');
-    navigate('/');
+    navigate('/react-blog');
   };
-
   return (
     <NavbarContainer>
       <Brand to="/react-blog" children="React Blog" />
       <NavbarList>
         <Nav to="/react-blog/about-me" children="關於我" />
         <Nav to="/react-blog/posts" children="文章列表" />
-        {user && <Nav to="/react-blog/new-post" children="發佈文章" />}
-        {user && <Nav to="/react-blog/" onClick={handleLogout} children="登出" />}
-        {!user && <Nav to="/react-blog/login" children="登入" />}
+        {localStorage.token ? (
+          <>
+            {user && <Nav to="/react-blog/new-post" children="發佈文章" />}
+            {user && <Logout onClick={handleLogout} children="登出" />}
+          </>
+        ) : (
+          <>
+            {!user && <Nav to="/react-blog/login" children="登入" />}
+            {!user && <Nav to="/react-blog/register" children="註冊" />}
+          </>
+        )}
       </NavbarList>
     </NavbarContainer>
   );

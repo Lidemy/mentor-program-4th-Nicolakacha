@@ -1,8 +1,9 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { setAuthToken } from '../../utils';
-import { login, getMe } from '../../WebAPI';
+import { register, getMe } from '../../WebAPI';
 import { AuthContext } from '../../contexts';
+import { LoadingContext } from '../../contexts';
 import styled from 'styled-components';
 import SubmitButton from '../../components/SubmitButton';
 
@@ -20,9 +21,9 @@ const ErrorMessage = styled.div`
   margin: 10px 0;
 `;
 
-const LoginWrapper = styled.form`
+const RegisterWrapper = styled.form`
   width: 360px;
-  height: 270px;
+  height: 360px;
   margin: 20px auto 0;
   padding: 20px;
   background: whitesmoke;
@@ -53,18 +54,29 @@ const ShowPasswordRadio = styled.div`
   margin-top: 10px;
 `;
 
-export default function LoginPage() {
+const Loading = styled.div`
+  margin: 20px 0 10px 0;
+  color: #909090;
+`;
+
+export default function RegisterPage() {
   const { setUser } = useContext(AuthContext);
+  const [nickname, setNickname] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
+    setIsLoading(true);
     e.preventDefault();
-    login(username, password)
+    register(nickname, username, password)
       .then((data) => {
-        if (data.ok === 0) setErrorMessage(data.message);
+        if (data.ok === 0) {
+          setIsLoading(false);
+          return setErrorMessage(data.message);
+        }
         setAuthToken(data.token);
         getMe()
           .then((response) => {
@@ -74,19 +86,32 @@ export default function LoginPage() {
             }
             setUser(response.data);
             navigate('/react-blog/');
+            setIsLoading(false);
           })
           .catch((err) => {
-            alert(err);
             navigate('/react-blog/');
+            setIsLoading(false);
+            return setErrorMessage(err);
           });
       })
-      .catch((err) => setErrorMessage(err));
+      .catch((err) => {
+        setIsLoading(false);
+        setErrorMessage(err);
+      });
   };
 
   return (
     <Root>
-      <LoginWrapper onSubmit={handleSubmit}>
-        <Title>請登入部落格</Title>
+      <RegisterWrapper onSubmit={handleSubmit}>
+        <Title>註冊新帳號</Title>
+        <InputWrapper>
+          暱稱：{' '}
+          <Input
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+            onFocus={() => setErrorMessage(null)}
+          />
+        </InputWrapper>
         <InputWrapper>
           帳號：{' '}
           <Input
@@ -95,7 +120,6 @@ export default function LoginPage() {
             onFocus={() => setErrorMessage(null)}
           />
         </InputWrapper>
-
         <InputWrapper>
           密碼：{' '}
           <Input
@@ -113,9 +137,13 @@ export default function LoginPage() {
             <label htmlFor="password">顯示密碼 </label>
           </ShowPasswordRadio>
         </InputWrapper>
-        <SubmitButton>登入</SubmitButton>
+        {isLoading ? (
+          <Loading>Loading...</Loading>
+        ) : (
+          <SubmitButton>註冊</SubmitButton>
+        )}
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-      </LoginWrapper>
+      </RegisterWrapper>
     </Root>
   );
 }
