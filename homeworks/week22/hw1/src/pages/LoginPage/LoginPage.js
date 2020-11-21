@@ -22,7 +22,7 @@ const ErrorMessage = styled.div`
 
 const LoginWrapper = styled.form`
   width: 360px;
-  height: 270px;
+  height: 290px;
   margin: 20px auto 0;
   padding: 20px;
   background: whitesmoke;
@@ -64,7 +64,7 @@ export default function LoginPage() {
     e.preventDefault();
     login(username, password)
       .then((data) => {
-        if (data.ok === 0) setErrorMessage(data.message);
+        if (data.ok === 0) { return setErrorMessage(data.message)};
         setAuthToken(data.token);
         getMe()
           .then((response) => {

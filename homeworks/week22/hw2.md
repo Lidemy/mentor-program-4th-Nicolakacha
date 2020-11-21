@@ -39,10 +39,29 @@
 
 ## 請列出 class component 的所有 lifecycle 的 method，並大概解釋觸發的時機點
 
+### 常用 Method
+- `constructor()`：component 被建立時會觸發。
+- `render()`：state 改變時就會在 DOM 上 render 內容，
+- `componentDidMount()`：component 被掛在 DOM Tree（mount）後觸發。
+- `componentDidUpdate()`：state 改變後會觸發。
+- `componentWillUnmount()`：component 從 DOM Tree 上移除（unmount）前觸發。
+- `shouldComponentUpdate()`：回傳的布林值可以決定在 state 改變後是否觸發 `render()` 及 `componentDidUpdate()`。 
 
+### 不那麼常用的 Method
+- `static getDerivedStateFromProps()`：在 `render()` 被觸發之前觸發。
+- `getSnapshotBeforeUpdate()`：在 React 實際去比對完並準備去修改 DOM 之前，可以先拿到 DOM 上面的一些資訊，回傳值會成為 `componentDidUpdate()` 的參數。 
+- `static getDerivedStateFromError()`：在 render phase 時被呼叫，所以不允許 side effect，當 component 捕捉到任何在它底下（不包含自己）的錯誤時，可以把錯誤記錄起來。
+- `componentDidCatch()`：在 commit phase 時被呼叫，所以允許 side effect，當 component 捕捉到任何在它底下（不包含自己）的錯誤時，可以把錯誤記錄起來。
+
+### 已經不建議使用的 Method
+- `UNSAFE_componentWillMount()`：在 `render()`之前被觸發，移除或新建 component 都不會在觸發，官方建議改用 `constructor()` 替代 
+- `UNSAFE_componentWillReceiveProps()`：在一個 mounted component 收到新的 props 之前被觸發，會回傳更新過的 props，並可用 setState 來更新 state。
+- `UNSAFE_componentWillUpdate()`：在 component 準備執行 `render()` 之前觸發。
 
 ## 請問 class component 與 function component 的差別是什麼？
-
+- 在熟悉物件導向的前題下，我覺得 class component 有更好的可讀性，同一個功能在實作上，function component 則比較抽象，且實作方法靈活多變，好處是可以自定義 hook 來做出各種功能，但也要思考協作時大家是不是有看懂彼此的 function。
+- Function component 可以捕獲 props。而在 class component 中，因為 this 會改變，所以永遠會調用到最新的 props，需要使用閉包才能捕獲 props。
 
 
 ## uncontrolled 跟 controlled component 差在哪邊？要用的時候通常都是如何使用？
+是不是 controlled component 取決是資料是否受 React 控制，如 input、textarea 等表單相關的 element，，Client 端可以輸入值來更新資料，即是 uncontrolled component，若把這個資料的控制權交給 React，此時 element 就是 controlled component。
