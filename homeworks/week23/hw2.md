@@ -1,6 +1,6 @@
 ## 為什麼我們需要 Redux？
 
-當 App 的 states 是需要在不同的 components 之間共用或是需要進行一連串複雜的更新時，就可使用 Redux 來管理共同的 states。在 React 中，雖然使用 React Context 也能解決 prop drilling，但 Redux 有進行額外的效能優化，且能讓 state 管理從 components 獨立出來，讓專案的目錄結構變得更清晰。
+當 App 的 states 是需要在不同的 components 之間共用，或是需要進行一連串複雜的更新時，就可使用 Redux 來管理共同的 states。在 React 中，雖然使用 React Context 也能解決 prop drilling，但 Redux 有進行額外的效能優化，且能讓 state 管理從 components 獨立出來，讓專案的目錄結構變得更清晰，還能額外使用 Redux 提供的 devtool 來管理 state。
 
 適合使用 Redux 的時機：
 - 有很多四散在各處的 state 要管理時
@@ -71,7 +71,7 @@ export default function filterReducer(state = initialState, action) {
 
 ### action
 
-上面提過 `dispatch(action)` 會把 action 物件傳給 reducer，因為 reducer 需要根據 action 的 type 來決定要執行什麼更新，所以 action 一定要有 type 這個屬性來定義這個 action 的種類，可以透過 action creator 的方式建立 action。把 action 的 type 建立成 const 變數，方便 debug，除了 type 之外，action 其他部份的結構可以自己定義，一般會建立一個 payload 屬性來傳參數給 reducer。
+上面提過 `dispatch(action)` 會把 action 物件傳給 reducer，因為 reducer 需要根據 action 的 type 來決定要執行什麼更新，所以 action 一定要有 type 這個屬性來定義這個 action 的種類，可以透過 action creator 的方式建立 action。把 action 的 type 建立成 const 變數來方便 debug，除了 type 之外，action 其他部份的結構可以自行定義，參考沿用 Flux 的 action 結構，一般會建立一個 payload 屬性用來傳參數給 reducer。
 
 /actionTypes.js
 ```js
@@ -96,10 +96,10 @@ export function deleteTodoState(id) {
 ![](https://redux.js.org/assets/images/ReduxDataFlowDiagram-49fa8c3968371d9ef6f2a1486bd40a26.gif)
  
 ## 該怎麼把 React 跟 Redux 串起來？
-需要透過 react-redux 這個 library 把 React和 Redux 串起來，並用 connect() 方法來連結，也可以透過 react-redux 提供的 hooks API 或是 redux toolkit 來讓設定 redux 變得更方便。
+需要透過 react-redux 這個 library 把 React 和 Redux 串起來，並用 connect() 方法來連結，也可以透過 react-redux 提供的 hooks API 或是 redux toolkit 來讓設定 redux 變得更方便。
 
 ### connect()
-使用 `connect()` 可以把連結 React component 和 Redux store，
+使用 `connect()` 可以把連結 React component 和 Redux store，並在最頂層使用 `<Provider store={store}>` 傳入 store，讓所有 `connect()` 包住的 component 都拿得到 store。
 
 ```js
 function connect(mapStateToProps, mapDispatchToProps, mergeProps, options)
@@ -136,10 +136,10 @@ export default connect(mapStateToProps, mapDispatchToProp)(Component);
 
 ### Redux Hooks API
 
-- 用 Provider 把 store 傳進 App。
+- 利用 `<Provider store={store}>` 在頂層把 store 傳進 App。
 - 在 component 中使用 `useDispatch` 來拿到 dispatch，引入 action creator 之後就可以直接使用 dispatch(action) 來觸發更新 state。
 - 在 component 中使用 `useSelector` 就可以根據不同的自訂 selector 來拿到需要 state。
 
 ### Redux Toolkit
-- 用 Provider 把 store 傳進 App。
+- 利用 `<Provider store={store}>` 在頂層把 store 傳進 App。
 - 不用設置 Redux 複雜的 boilerplate，在 Redux 使用 `createSlice` 定義好 slice，slice 裡面整合了 action creator、actionTypes 以及 reducers，可以直接把 selector 和 action creator 直接傳出去給 component 使用，在 component 中利用 `useDispatch` 的 dispatch 來觸發更新 state。
