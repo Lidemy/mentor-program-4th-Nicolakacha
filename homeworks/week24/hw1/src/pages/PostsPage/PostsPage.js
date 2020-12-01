@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Pagination from '../../components/Pagination';
 import Loading from '../../components/Loading';
+import { MEDIA_QUERY_MD } from '../../constants/breakpoint';
 import {
   getLimitedPosts,
   selectTotalPostsNumber,
@@ -14,8 +15,12 @@ import {
 } from '../../redux/postsSlice';
 
 const Root = styled.div`
-  margin: 0 10vw;
-  height: calc(100vh - 123px);
+  min-height: 90vh;
+  margin-top: 20px;
+  margin: 45px 10vw;
+  ${MEDIA_QUERY_MD} {
+    margin: 0 10vw;
+  }
 `;
 
 const PostsContainer = styled.div`
@@ -24,10 +29,17 @@ const PostsContainer = styled.div`
   display: flex;
   algin-items: flex-end;
   justify-content: space-between;
+  flex-direction: column;
+  ${MEDIA_QUERY_MD} {
+    flex-direction: row;
+  }
 `;
 
 const PostTitle = styled(Link)`
   font-size: 20px;
+  ${MEDIA_QUERY_MD} {
+    padding-bottom: 10px;
+  }
 `;
 
 const PostDate = styled.div`
@@ -37,9 +49,14 @@ const PostDate = styled.div`
 function PostItem({ post }) {
   return (
     <PostsContainer>
-      <PostTitle
-        to={`/react-blog/post/${post.id}`}
-      >{`[${post.user.nickname}的文章]  ${post.title}`}</PostTitle>
+      <PostTitle to={`/react-blog/post/${post.id}`}>
+        {post.user.nickname.length > 10
+          ? `[${post.user.nickname.slice(0, 9)}...的文章] `
+          : `[${post.user.nickname}的文章] `}
+        {post.title.length > 20
+          ? `${post.title.slice(0, 20)}...`
+          : `${post.title}`}
+      </PostTitle>
       <PostDate>{new Date(post.createdAt).toLocaleString()}</PostDate>
     </PostsContainer>
   );

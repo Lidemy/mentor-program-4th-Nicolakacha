@@ -1,5 +1,6 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { MEDIA_QUERY_MD } from '../../constants/breakpoint';
 import styled from 'styled-components';
 import {
   logout,
@@ -8,7 +9,7 @@ import {
 } from '../../redux/userSlice';
 
 const NavbarContainer = styled.div`
-  height: 64px;
+  height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,6 +20,11 @@ const NavbarContainer = styled.div`
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
   padding: 0px 5vw;
   background: white;
+  flex-direction: column;
+  ${MEDIA_QUERY_MD} {
+    height: 64px;
+    flex-direction: row;
+  }
 `;
 
 const NavbarList = styled.div`
@@ -28,20 +34,30 @@ const NavbarList = styled.div`
 const Brand = styled(Link)`
   font-size: 32px;
   color: #017a75;
+  margin-top: 10px;
+  ${MEDIA_QUERY_MD} {
+    margin-top: 0px;
+  }
 `;
 
 const Nav = styled(NavLink)`
   display: flex;
+  margin: 0 6px;
   align-items: center;
-  margin: 0 30px;
   height: 64px;
+  ${MEDIA_QUERY_MD} {
+    margin: 0 30px;
+  }
 `;
 
 const Logout = styled.a`
   display: flex;
   align-items: center;
-  margin: 0 30px;
+  margin: 0 6px;
   height: 64px;
+  ${MEDIA_QUERY_MD} {
+    margin: 0 30px;
+  }
 `;
 
 export default function Navbar() {

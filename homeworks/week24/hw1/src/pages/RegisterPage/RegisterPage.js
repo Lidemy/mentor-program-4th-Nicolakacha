@@ -60,7 +60,7 @@ export default function RegisterPage() {
 
   return (
     <Root>
-      <FormBox onSubmit={handleSubmit} $height={360} $width={360}>
+      <FormBox onSubmit={handleSubmit} $width={360}>
         <Title>註冊新帳號</Title>
 
         <InputBox

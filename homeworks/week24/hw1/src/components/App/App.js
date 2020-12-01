@@ -17,12 +17,12 @@ import {
 
 const Root = styled.div`
   padding-top: 84px;
+  height: 100%;
 `;
 
 const Footer = styled.div`
   background: rgb(49 49 49);
   padding: 6px 0;
-  bottom: 0;
   width: 100%;
   color: whitesmoke;
   text-align: center;
@@ -31,7 +31,7 @@ const Footer = styled.div`
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getMe())
+    dispatch(getMe());
   }, [dispatch]);
 
   return (

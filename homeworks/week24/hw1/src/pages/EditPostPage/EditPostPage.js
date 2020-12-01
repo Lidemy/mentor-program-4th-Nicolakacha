@@ -13,7 +13,7 @@ import {
 } from '../../redux/postsSlice';
 
 const Root = styled.div`
-  margin: 0 10vw;
+  margin-top: 30px;
   min-height: calc(100vh - 143px);
 `;
 
@@ -93,12 +93,7 @@ export default function EditPostPage() {
 
   return (
     <Root>
-      <FormBox
-        onSubmit={handleSubmit}
-        $height={390}
-        $width={460}
-        $paddingType={'post'}
-      >
+      <FormBox onSubmit={handleSubmit} $width={460} $paddingType={'post'}>
         <TitleWrapper>
           <Title>編輯文章 #{id}</Title>
         </TitleWrapper>

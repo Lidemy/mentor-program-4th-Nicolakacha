@@ -3,13 +3,13 @@ import { ReactComponent as Bean } from '../../images/bean.svg';
 
 const Root = styled.div`
   margin: 0 10vw;
-  height: calc(100vh - 143px);
+  height: calc(100vh - 133px);
 `;
 
 const PageWrapper = styled.div`
-  width: 600px;
+  max-width: 600px;
   height: 400px;
-  margin: 20px auto 0;
+  margin: 50px auto 0;
   padding: 20px;
   background: rgba(210, 210, 210, 0.4);
   text-align: center;
@@ -30,16 +30,19 @@ const Content = styled.div`
   justify-content: center;
 `;
 
+const BeanWrapper = styled.div`
+  transform: translateX(4%);
+`
+
 export default function AboutMePage() {
   return (
     <Root>
       <PageWrapper>
         <Title>A Simple Blog</Title>
         <Content>
-          這是 React SPA 部落格練習～
+          利用 React 實作 SPA 部落格～
           <br />
-          使用 React Hooks, Styled Components, React Router 6
-          <Bean />
+          <BeanWrapper><Bean /></BeanWrapper> 
         </Content>
       </PageWrapper>
     </Root>

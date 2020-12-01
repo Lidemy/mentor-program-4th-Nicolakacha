@@ -32,7 +32,7 @@ const Loading = styled.div`
 `;
 
 const SubmitButton = styled(NormalButton)`
-  margin: 10px auto;
+  margin: 30px auto 10px;
 `;
 
 export default function LoginPage() {
@@ -58,7 +58,7 @@ export default function LoginPage() {
 
   return (
     <Root>
-      <FormBox onSubmit={handleSubmit} $height={290} $width={350}>
+      <FormBox onSubmit={handleSubmit} $width={350}>
         <Title>請登入部落格</Title>
         <InputBox
           type={'text'}
