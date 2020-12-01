@@ -16,7 +16,7 @@ const Input = styled.input`
   font-size: 16px;
 `;
 
-export default function InputBox({
+export default function UserInput({
   type,
   value,
   title,
@@ -36,7 +36,7 @@ export default function InputBox({
   );
 }
 
-InputBox.propTypes = {
+UserInput.propTypes = {
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

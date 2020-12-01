@@ -35,6 +35,7 @@ const Brand = styled(Link)`
   font-size: 32px;
   color: #017a75;
   margin-top: 10px;
+  -webkit-tap-highlight-color: transparent;
   ${MEDIA_QUERY_MD} {
     margin-top: 0px;
   }
@@ -45,6 +46,7 @@ const Nav = styled(NavLink)`
   margin: 0 6px;
   align-items: center;
   height: 64px;
+  -webkit-tap-highlight-color: transparent;
   ${MEDIA_QUERY_MD} {
     margin: 0 30px;
   }

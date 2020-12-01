@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import NormalButton from '../NormalButton';
+import Button from '../Button';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserId } from '../../redux/userSlice';
@@ -31,7 +31,7 @@ const PostInfo = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
-const PostButton = styled(NormalButton)`
+const PostButton = styled(Button)`
   margin: 10px 20px 10px 0px;
 `;
 

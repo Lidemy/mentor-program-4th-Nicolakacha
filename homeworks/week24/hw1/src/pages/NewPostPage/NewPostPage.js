@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import FormBox from '../../components/FormBox';
-import NormalButton from '../../components/NormalButton';
+import Form from '../../components/Form';
+import Button from '../../components/Button';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUserId } from '../../redux/userSlice';
 import {
   addPost,
@@ -64,7 +64,7 @@ const Loading = styled.div`
   color: #909090;
 `;
 
-const SubmitButton = styled(NormalButton)`
+const SubmitButton = styled(Button)`
   margin: 10px auto;
 `;
 
@@ -95,7 +95,7 @@ export default function NewPostPage() {
 
   return (
     <Root>
-      <FormBox onSubmit={handleSubmit} $width={460} $paddingType={'post'}>
+      <Form onSubmit={handleSubmit} $width={460} $paddingType={'post'}>
         <TitleWrapper>
           <Title>新文章</Title>
         </TitleWrapper>
@@ -127,7 +127,7 @@ export default function NewPostPage() {
             {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           </>
         )}
-      </FormBox>
+      </Form>
     </Root>
   );
 }

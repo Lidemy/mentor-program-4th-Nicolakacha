@@ -1,10 +1,9 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-
+import styled from 'styled-components';
 import Post from '../../components/Post';
 import Loading from '../../components/Loading';
-import styled from 'styled-components';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { getPost, selectIsLoading, selectPost } from '../../redux/postsSlice';
 
 const Root = styled.div`

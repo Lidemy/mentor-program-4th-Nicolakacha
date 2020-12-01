@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const FormBox = styled.form`
+const Form = styled.form`
   height: auto;
   min-height: 290px;
   max-width: ${(props) => props.$width}px;
@@ -16,4 +16,4 @@ const FormBox = styled.form`
   }
 `;
 
-export default FormBox;
+export default Form;

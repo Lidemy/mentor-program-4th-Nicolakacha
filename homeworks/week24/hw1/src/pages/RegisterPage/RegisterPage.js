@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import FormBox from '../../components/FormBox';
-import InputBox from '../../components/InputBox';
-import NormalButton from '../../components/NormalButton';
+import { UserInput, TogglePasswordInput } from '../../components/Input';
+import styled from 'styled-components';
+import Form from '../../components/Form';
+import Button from '../../components/Button';
 import ErrorMessage from '../../components/ErrorMessage';
 
 import {
@@ -23,16 +23,12 @@ const Title = styled.h1`
   font-size: 24px;
 `;
 
-const ShowPasswordRadio = styled.div`
-  margin-top: 20px;
-`;
-
 const Loading = styled.div`
   margin: 40px auto;
   color: #909090;
 `;
 
-const SubmitButton = styled(NormalButton)`
+const SubmitButton = styled(Button)`
   margin: 10px auto;
 `;
 
@@ -48,7 +44,6 @@ export default function RegisterPage() {
   const setError = () => dispatch(setUserErrorMessage(null));
   const setValue = (setState) => (e) => setState(e.target.value);
   const togglePassword = () => setShowPassword(showPassword ? false : true);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(register({ nickname, username, password })).then((userId) => {
@@ -60,10 +55,10 @@ export default function RegisterPage() {
 
   return (
     <Root>
-      <FormBox onSubmit={handleSubmit} $width={360}>
+      <Form onSubmit={handleSubmit} $width={360}>
         <Title>註冊新帳號</Title>
 
-        <InputBox
+        <UserInput
           type={'text'}
           title={'暱稱：'}
           value={nickname}
@@ -71,7 +66,7 @@ export default function RegisterPage() {
           handleInputChange={setValue(setNickname)}
         />
 
-        <InputBox
+        <UserInput
           type={'text'}
           title={'帳號：'}
           value={username}
@@ -79,7 +74,7 @@ export default function RegisterPage() {
           handleInputChange={setValue(setUsername)}
         />
 
-        <InputBox
+        <UserInput
           type={showPassword ? 'text' : 'password'}
           title={'密碼：'}
           value={password}
@@ -87,10 +82,7 @@ export default function RegisterPage() {
           handleInputChange={setValue(setPassword)}
         />
 
-        <ShowPasswordRadio>
-          <input type="checkbox" onClick={togglePassword} id="password" />
-          <label htmlFor="password">顯示密碼 </label>
-        </ShowPasswordRadio>
+        <TogglePasswordInput togglePassword={togglePassword} />
 
         {isUserLoading ? (
           <Loading>Loading...</Loading>
@@ -102,7 +94,7 @@ export default function RegisterPage() {
             <SubmitButton>註冊</SubmitButton>
           </>
         )}
-      </FormBox>
+      </Form>
     </Root>
   );
 }

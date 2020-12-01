@@ -6,7 +6,7 @@ const Root = styled.div`
   height: calc(100vh - 133px);
 `;
 
-const PageWrapper = styled.div`
+const Container = styled.div`
   max-width: 600px;
   height: 400px;
   margin: 50px auto 0;
@@ -37,14 +37,14 @@ const BeanWrapper = styled.div`
 export default function AboutMePage() {
   return (
     <Root>
-      <PageWrapper>
+      <Container>
         <Title>A Simple Blog</Title>
         <Content>
           利用 React 實作 SPA 部落格～
           <br />
           <BeanWrapper><Bean /></BeanWrapper> 
         </Content>
-      </PageWrapper>
+      </Container>
     </Root>
   );
 }

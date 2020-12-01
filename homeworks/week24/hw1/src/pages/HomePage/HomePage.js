@@ -1,9 +1,8 @@
+import styled from 'styled-components';
+import Post from '../../components/Post';
+import Loading from '../../components/Loading';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import Loading from '../../components/Loading';
-import Post from '../../components/Post';
-
 import {
   getLimitedPosts,
   selectPosts,
@@ -11,12 +10,12 @@ import {
 } from '../../redux/postsSlice';
 
 const Root = styled.div`
-  margin: 0 10vw;
+  margin: 25px 10vw 0;
   min-height: calc(100vh - 123px);
 `;
 
 const Title = styled.h1`
-  margin-bottom: 0;
+  margin: 45px 0 0 0;
 `;
 
 const LatestPosts = ({ posts }) =>

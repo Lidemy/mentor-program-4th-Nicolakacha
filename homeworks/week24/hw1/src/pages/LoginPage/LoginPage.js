@@ -1,10 +1,10 @@
+import styled from 'styled-components';
+import Form from '../../components/Form';
+import Button from '../../components/Button';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import FormBox from '../../components/FormBox';
-import InputBox from '../../components/InputBox';
-import NormalButton from '../../components/NormalButton';
+import { UserInput, TogglePasswordInput } from '../../components/Input';
 import ErrorMessage from '../../components/ErrorMessage';
 import {
   setUserErrorMessage,
@@ -12,6 +12,7 @@ import {
   selectUserErrorMessage,
   login,
 } from '../../redux/userSlice';
+
 
 const Root = styled.div`
   margin: 0 10vw;
@@ -22,16 +23,12 @@ const Title = styled.h1`
   font-size: 24px;
 `;
 
-const ShowPasswordRadio = styled.div`
-  margin-top: 20px;
-`;
-
 const Loading = styled.div`
   margin: 40px auto;
   color: #909090;
 `;
 
-const SubmitButton = styled(NormalButton)`
+const SubmitButton = styled(Button)`
   margin: 30px auto 10px;
 `;
 
@@ -58,26 +55,24 @@ export default function LoginPage() {
 
   return (
     <Root>
-      <FormBox onSubmit={handleSubmit} $width={350}>
+      <Form onSubmit={handleSubmit} $width={350}>
         <Title>請登入部落格</Title>
-        <InputBox
+        <UserInput
           type={'text'}
           title={'帳號：'}
           value={username}
           handleInputFocus={setError}
           handleInputChange={setValue(setUsername)}
         />
-        <InputBox
+        <UserInput
           type={showPassword ? 'text' : 'password'}
           title={'密碼：'}
           value={password}
           handleInputFocus={setError}
           handleInputChange={setValue(setPassword)}
         />
-        <ShowPasswordRadio>
-          <input type="checkbox" onClick={togglePassword} id="password" />
-          <label htmlFor="password">顯示密碼 </label>
-        </ShowPasswordRadio>
+
+        <TogglePasswordInput togglePassword={togglePassword} />
 
         {isUserLoading ? (
           <Loading>Loading...</Loading>
@@ -89,7 +84,7 @@ export default function LoginPage() {
             <SubmitButton>登入</SubmitButton>
           </>
         )}
-      </FormBox>
+      </Form>
     </Root>
   );
 }

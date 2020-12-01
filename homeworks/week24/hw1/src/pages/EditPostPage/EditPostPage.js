@@ -1,9 +1,9 @@
+import styled from 'styled-components';
+import Button from '../../components/Button';
+import Form from '../../components/Form';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import FormBox from '../../components/FormBox';
-import NormalButton from '../../components/NormalButton';
 import { selectUserId } from '../../redux/userSlice';
 import {
   editPost,
@@ -59,7 +59,7 @@ const ErrorMessage = styled.div`
   font-size: 16px;
 `;
 
-const SubmitButton = styled(NormalButton)`
+const SubmitButton = styled(Button)`
   margin: 10px auto;
 `;
 
@@ -93,10 +93,11 @@ export default function EditPostPage() {
 
   return (
     <Root>
-      <FormBox onSubmit={handleSubmit} $width={460} $paddingType={'post'}>
+      <Form onSubmit={handleSubmit} $width={460} $paddingType={'post'}>
         <TitleWrapper>
           <Title>編輯文章 #{id}</Title>
         </TitleWrapper>
+
         <InputWrapper>
           <InputHeader>標題：</InputHeader>
           <TitleInput
@@ -105,11 +106,11 @@ export default function EditPostPage() {
             onFocus={setError}
           />
         </InputWrapper>
+
         <InputWrapper>
           <InputHeader>內容：</InputHeader>
           <BodyInput
             value={body}
-            col="20"
             onChange={controlInput(setBody)}
             onFocus={setError}
           />
@@ -117,7 +118,7 @@ export default function EditPostPage() {
 
         <SubmitButton>送出文章</SubmitButton>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-      </FormBox>
+      </Form>
     </Root>
   );
 }

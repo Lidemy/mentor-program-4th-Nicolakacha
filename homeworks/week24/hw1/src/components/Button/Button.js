@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const NormalButton = styled.button`
+const Button = styled.button`
   padding: 5px 10px;
   border-radius: 10px;
   border: transparent;
@@ -16,4 +16,4 @@ const NormalButton = styled.button`
   }
 `;
 
-export default NormalButton;
+export default Button;
