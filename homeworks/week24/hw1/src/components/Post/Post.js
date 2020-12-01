@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import NormalButton from '../NormalButton';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserId } from '../../redux/userSlice';
-import { deletePost } from '../../redux/postsSlice';
+import { deletePost, getLimitedPosts } from '../../redux/postsSlice';
 
 const PostContainer = styled.div`
   padding: 20px;
@@ -14,6 +14,7 @@ const PostContainer = styled.div`
 
 const PostTitle = styled.h2`
   font-size: 24px;
+  word-break: break-all;
 `;
 
 const PostDate = styled.div`
@@ -38,17 +39,13 @@ export default function Post({ post }) {
   const userId = useSelector(selectUserId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const currentPath = location.pathname;
-
   const handleEditPost = (id) => () => navigate(`/react-blog/post/edit/${id}`);
 
   const handleDeletePost = (postId) => () =>
     dispatch(deletePost(postId)).then((res) => {
       if (res.ok === 0) return;
-      currentPath === '/react-blog'
-        ? window.location.reload()
-        : navigate('/react-blog');
+      dispatch(getLimitedPosts(1, 5));
+      navigate('/react-blog');
     });
 
   return (
